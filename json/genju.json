@@ -14,7 +14,7 @@
   "tupianqian": "src=\"",
   "tupianhou": "\"",
   "biaotiqian": "title=\"",
-  "biaotihou": "\>"", 
+  "biaotihou": "\"", 
   "lianjieqian": "href=\"",
   "lianjiehou": "\"",
   "sousuoqian": "/index.php/ajax/suggest?mid=1&wd=",
