@@ -12,7 +12,7 @@
 		"ext": "https://xiaoxuwenzi.github.io/py/plugin/py_douban.py"
 	},{
      "key":"csp_biubiu_genju",
-     "name":"genju(XB)",
+     "name":"genju",
      "type":3,
      "api":"csp_XBiubiu",
      "searchable":1,
