@@ -1,5 +1,5 @@
 {
-  "spider": "https://xiaoxuwenzi.github.io/jar/fan2.22.jar;md5;C8D6F4606B28B482F1560FC80FEB90F7",
+  "spider": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/fan2.22.jar;md5;5B89086B9470238BF5F9EE14F71A563F",
   "wallpaper": "http://xhww.fun:63/img.php",
   "sites": [
     {
@@ -20,7 +20,7 @@
     //  "searchable": 1,
     //  "quickSearch": 1,
     //  "filterable": 1,
-    //  "ext": "https://xiaoxuwenzi.github.io/py/plugin/py_douban.py"
+    //  "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/plugin/py_douban.py"
     //},
     {
       "key": "玩偶哥哥",
@@ -30,10 +30,10 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
-      "ext": "https://xiaoxuwenzi.github.io/tk/token.txt+4k|auto|fhd$$$https://www.wogg.xyz/$$$弹"
+      "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/tk/token.txt+4k|auto|fhd$$$https://www.wogg.xyz/$$$弹"
       },
     {"key":"荐片弹幕版","name":"荐片|弹幕","type": 3,"api":"csp_Jianpian","searchable":1,"quickSearch":1,"filterable":1,"ext": {"danmu": true},
-    "jar": "https://xiaoxuwenzi.github.io/jar/ok1205.nogo.png;md5;07B149DF42E7F23FCBC6E2AC1A1E0EB5"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/ok1205.nogo.png;md5;4E77997A6D49403BBA3EB5472829EF38"
     },
     {
       "key": "lf_js_search",
@@ -43,14 +43,14 @@
       "changeable": 1,
       "quickSearch": 0,
       "filterable": 0,
-      "api": "https://xiaoxuwenzi.github.io/json/lf_search3_min.js"
+      "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/lf_search3_min.js"
   },
   {
     "key": "drpy_js_新片场",
     "name": "影视 | 新片场[js]",
     "type": 3,
     "api": "https://ghproxy.net/https://raw.githubusercontent.com/hjdhnx/dr_py/main/libs/drpy2.min.js",
-    "ext": "https://xiaoxuwenzi.github.io/json/新片场.js"
+    "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/新片场.js"
 },
 {
   "key": "drpy_js_我的哔哩",
@@ -61,11 +61,11 @@
 },
   {"key": "py_ali", 
             "name": "PY组合", 
-            "type": 3, "api": "https://xiaoxuwenzi.github.io/py/py_ali.py", 
+            "type": 3, "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_ali.py", 
             "searchable": 1,
              "quickSearch": 1, 
              "filterable": 1,
-             "ext": {"token": "https://xiaoxuwenzi.github.io/tk/token.txt", "thread": "10"}
+             "ext": {"token": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/tk/token.txt", "thread": "10"}
             },
   //{"key":"bili",
   //  "name":"哔哩哔哩",
@@ -80,8 +80,8 @@
   //            },
   //  "ext": {
   //          "type": "娱乐#搞笑#演唱会#舞蹈#电影#电视剧#宅舞#动物世界#纪录片",
-  //          "cookie": "https://xiaoxuwenzi.github.io/tk/bi-t.txt"},
-  //         "jar": "https://xiaoxuwenzi.github.io/jar/ok1205.nogo.png;md5;07B149DF42E7F23FCBC6E2AC1A1E0EB5"
+  //          "cookie": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/tk/bi-t.txt"},
+  //         "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/ok1205.nogo.png;md5;4E77997A6D49403BBA3EB5472829EF38"
   //},
   
   {"key":"sp360",
@@ -91,7 +91,7 @@
     "filterable": 1,
     "changeable":1,
     "ext": {"danmu": true},
-    "jar": "https://xiaoxuwenzi.github.io/jar/ok1205.nogo.png;md5;07B149DF42E7F23FCBC6E2AC1A1E0EB5"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/ok1205.nogo.png;md5;4E77997A6D49403BBA3EB5472829EF38"
   },
   
 {
@@ -102,7 +102,7 @@
     "changeable": 1,
     "quickSearch": 1,
     "filterable": 1,
-    "api": "https://xiaoxuwenzi.github.io/json/lf_p2p2_min.js",
+    "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/lf_p2p2_min.js",
     "ext": "18+"
 },    
     {
@@ -113,7 +113,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
-      "ext": "https://xiaoxuwenzi.github.io/py/plugin/py_ddys2.py"
+      "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/plugin/py_ddys2.py"
     },
     {
       "key": "新片场",
@@ -121,8 +121,8 @@
       "type": 3,
       "api": "csp_XBPQ",
       "playerType": "2",
-      "ext": "https://xiaoxuwenzi.github.io/json/XBPQ/新片场.json",
-      "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
+      "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/XBPQ/新片场.json",
+      "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar"
     },
    
     {
@@ -260,7 +260,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "jar": "https://xiaoxuwenzi.github.io/jar/app.jar;md5;FC72CA9B45B91E40342CA485D098947A"
+      "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/app.jar;md5;FC72CA9B45B91E40342CA485D098947A"
     },
     {
       "key": "一起看 ",
@@ -456,7 +456,7 @@
               "key": "py_cntv",
               "name": "央视",
               "type": 3,
-              "api": "https://xiaoxuwenzi.github.io/py/py_cntv.py",
+              "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_cntv.py",
               "searchable": 0,
               "quickSearch": 0,
               "filterable": 1
@@ -465,43 +465,43 @@
               "key": "py_live",
               "name": "直播",
               "type": 3,
-              "api": "https://xiaoxuwenzi.github.io/py/py_live.py",
+              "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_live.py",
               "searchable": 0,
               "quickSearch": 0,
               "filterable": 1,
               "ext": {
-                  "url": "https://xiaoxuwenzi.github.io/json/live.json"
+                  "url": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/live.json"
               }
           },
           {
               "key": "py_bilibilivd",
               "name": "B站视频",
               "type": 3,
-              "api": "https://xiaoxuwenzi.github.io/py/py_bilibilivd.py",
+              "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_bilibilivd.py",
               "searchable": 1,
               "quickSearch": 1,
               "filterable": 1,
               "ext": {
-                  "json": "https://xiaoxuwenzi.github.io/json/bili.json"
+                  "json": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/bili.json"
               }
           },
           {
               "key": "py_bilibilimd",
               "name": "B站番剧",
               "type": 3,
-              "api": "https://xiaoxuwenzi.github.io/py/py_bilibilimd.py",
+              "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_bilibilimd.py",
               "searchable": 1,
               "quickSearch": 1,
               "filterable": 1,
               "ext": {
-                  "json": "https://xiaoxuwenzi.github.io/json/bili.json"
+                  "json": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/bili.json"
               }
           },
           {
               "key": "py_sport",
               "name": "体育直播",
               "type": 3,
-              "api": "https://xiaoxuwenzi.github.io/py/py_sport.py",
+              "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_sport.py",
               "searchable": 0,
               "quickSearch": 0,
               "filterable": 0
@@ -510,7 +510,7 @@
               "key": "py_alist",
               "name": "Alist网盘",
               "type": 3,
-              "api": "https://xiaoxuwenzi.github.io/py/py_alist.py",
+              "api": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/py/py_alist.py",
               "searchable": 0,
               "quickSearch": 0,
               "filterable": 0,
@@ -522,7 +522,7 @@
             "type": 3,
             "api": "csp_XBPQ",
             "playerType": "2",
-            "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar",
+            "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar",
             "ext": {
               "主页url": "https://www.3ayy.com",
               "简介": "module-info-introduction\">&&</p>",
@@ -571,7 +571,7 @@
       "分类url": "https://www.putaojuchang.com/show/{cateId}/page/{catePg}.html",
       "分类": "微剧场$1"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar"
   },
  
   {
@@ -595,7 +595,7 @@
       "分类url": "https://mimiju.com/vodshow/{cateId}--{by}------{catePg}---.html",
       "分类": "短剧$20"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar"
   },
   {
     "key": "csp_XBPQ_vstv",
@@ -609,7 +609,7 @@
       "分类url": "https://www.ytshengde.com/sanyisw/{cateId}-{area}-------{catePg}---{year}.html",
       "分类": "短剧$5#电视剧$2#电影$1#动漫$4#综艺$3"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar"
   },
   {
     "key": "姐姐",
@@ -651,7 +651,7 @@
     "quickSearch": 1,
     "filterable": 1,
     "ext": "分类url:https://m.duanju5.com/vodshow/{cateId}--{by}------{catePg}---{year}.html,分类:逆袭$nixi#甜宠$tianchong#虐恋$nuelian#穿越$chuanyue#重生$chongsheng",
-    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar"
   },
 
   {
@@ -666,7 +666,7 @@
       "分类url": "https://aoao.tv/vodshow/{cateId}--------{catePg}---.html",
       "分类": "短剧$20#电视剧$21#电影$22#动漫$23#综艺$24"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
+    "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/c1.jar"
   },
 {
       "key": "非凡资源",
@@ -735,8 +735,8 @@
       "api": "csp_Market",
       "searchable": 0,
       "changeable": 0,
-      "ext": "https://xiaoxuwenzi.github.io/json/market.json",
-      "jar": "https://xiaoxuwenzi.github.io/jar/fm-jingdu.jar;md5;4B76761D84137B65EF9973339F85BDF8"
+      "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/json/market.json",
+      "jar": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/jar/fm-jingdu.jar;md5;3717E489B8BBB9956D9F8A19CD7FD371"
     },
     {
       "key": "push_agent",
@@ -746,7 +746,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
-      "ext": "https://xiaoxuwenzi.github.io/tk/token.txt"
+      "ext": "https://ghproxy.net/https://raw.githubusercontent.com/xiaoxuwenzi/xiaoxuwenzi.github.io/main/tk/token.txt"
     }
   ],
   "parses": [
