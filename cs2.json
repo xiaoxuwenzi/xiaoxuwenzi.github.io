@@ -122,7 +122,7 @@
       "api": "csp_XBPQ",
       "playerType": "2",
       "ext": "https://xiaoxuwenzi.github.io/json/XBPQ/新片场.json",
-      "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt"
+      "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
     },
    
     {
@@ -522,7 +522,7 @@
             "type": 3,
             "api": "csp_XBPQ",
             "playerType": "2",
-            "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt",
+            "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar",
             "ext": {
               "主页url": "https://www.3ayy.com",
               "简介": "module-info-introduction\">&&</p>",
@@ -571,7 +571,7 @@
       "分类url": "https://www.putaojuchang.com/show/{cateId}/page/{catePg}.html",
       "分类": "微剧场$1"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt"
+    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
   },
  
   {
@@ -595,7 +595,7 @@
       "分类url": "https://mimiju.com/vodshow/{cateId}--{by}------{catePg}---.html",
       "分类": "短剧$20"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt"
+    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
   },
   {
     "key": "csp_XBPQ_vstv",
@@ -609,7 +609,7 @@
       "分类url": "https://www.ytshengde.com/sanyisw/{cateId}-{area}-------{catePg}---{year}.html",
       "分类": "短剧$5#电视剧$2#电影$1#动漫$4#综艺$3"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt"
+    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
   },
   {
     "key": "姐姐",
@@ -651,7 +651,7 @@
     "quickSearch": 1,
     "filterable": 1,
     "ext": "分类url:https://m.duanju5.com/vodshow/{cateId}--{by}------{catePg}---{year}.html,分类:逆袭$nixi#甜宠$tianchong#虐恋$nuelian#穿越$chuanyue#重生$chongsheng",
-    "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt"
+    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
   },
 
   {
@@ -666,7 +666,7 @@
       "分类url": "https://aoao.tv/vodshow/{cateId}--------{catePg}---.html",
       "分类": "短剧$20#电视剧$21#电影$22#动漫$23#综艺$24"
     },
-    "jar": "https://xiaoxuwenzi.github.io/jar/c (1).txt"
+    "jar": "https://xiaoxuwenzi.github.io/jar/c1.jar"
   },
 {
       "key": "非凡资源",
