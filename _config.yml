@@ -12,7 +12,7 @@ logo: "/assets/logo.png"    # 网站LOGO路径
 # ========================
 #remote_theme: mmistakes/minimal-mistakes  # 使用最流行的Jekyll主题
 # 或选用中文友好主题：
-remote_theme: kitian616/jekyll-TeXt-theme
+theme: minima
 
 # ========================
 # 国际化设置（中文优化）
