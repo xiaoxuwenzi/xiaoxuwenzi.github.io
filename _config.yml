@@ -1,0 +1,116 @@
+# ========================
+# 基础配置
+# ========================
+title: "我的技术博客"          # 网站标题
+description: "记录技术学习与生活思考"  # 网站描述
+baseurl: ""                 # 子目录路径（若无子目录留空）
+url: "https://xiaoxuwenzi.github.io"  # 替换为你的实际网址
+logo: "/assets/logo.png"    # 网站LOGO路径
+
+# ========================
+# 主题配置（推荐使用远程主题）
+# ========================
+#remote_theme: mmistakes/minimal-mistakes  # 使用最流行的Jekyll主题
+# 或选用中文友好主题：
+remote_theme: kitian616/jekyll-TeXt-theme
+
+# ========================
+# 国际化设置（中文优化）
+# ========================
+lang: zh-CN
+timezone: Asia/Shanghai
+date_format: "%Y年%m月%d日"
+jekyll-polyglot:
+  default_lang: zh
+  languages: ["zh", "en"]  # 支持中英文切换
+
+# ========================
+# 作者信息
+# ========================
+author:
+  name: "xiaoxuwenzi"
+  avatar: "/assets/bio-photo.jpg"  # 头像路径
+  bio: "剪辑师 | 技术博主"
+  location: "安徽, 中国"
+  email: ""
+  links:
+    - label: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/yourusername"
+    - label: "Twitter"
+      icon: "fab fa-twitter"
+      url: "https://twitter.com/yourhandle"
+
+# ========================
+# 导航菜单
+# ========================
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "single"
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+
+# ========================
+# 插件配置
+# ========================
+plugins:
+  - jekyll-feed           # RSS订阅支持
+  - jekyll-sitemap        # 自动生成站点地图
+  - jekyll-seo-tag        # SEO优化
+  - jekyll-archives       # 文章归档
+  - jekyll-paginate       # 分页功能
+
+# ========================
+# 评论系统（推荐utteranc.es）
+# ========================
+utterances:
+  repo: xiaoxuwenzi/xiaoxuwenzi  # 替换为你的仓库
+  issue_term: "pathname"
+  theme: "github-light"
+
+# ========================
+# 统计分析
+# ========================
+google_analytics: "UA-XXXXXXXXX-X"  # 替换为你的GA ID
+baidu_analytics: "你的百度统计ID"    # 国内用户推荐添加
+
+# ========================
+# 博客功能配置
+# ========================
+paginate: 5                # 每页显示文章数
+paginate_path: "/page:num" # 分页路径格式
+jekyll-archives:
+  enabled: [year, tags]    # 启用按年和标签归档
+  layouts:
+    year: "archive-year"
+    tag: "archive-tag"
+  permalinks:
+    year: "/archives/:year/"
+    tag: "/tags/:tag/"
+
+# ========================
+# 社交分享配置
+# ========================
+share:
+  twitter: true
+  facebook: true
+  linkedin: true
+  weibo: true              # 微博分享
+  wechat: true             # 微信分享（需要配置二维码）
+
+# ========================
+# 自定义变量
+# ========================
+custom:
+  favicon: "/favicon.ico"  # 网站图标
+  open_graph: true         # 开启OG协议
+  twitter_cards: true      # 开启Twitter卡片
+  github_edit:
+    repository: "xiaoxuwenzi/xiaoxuwenzi"  # 启用"编辑此页"功能
+    branch: "main"
