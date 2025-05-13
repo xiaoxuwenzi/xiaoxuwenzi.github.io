@@ -46,7 +46,7 @@ author:
 # ========================
 defaults:
   - scope:
-      path: ""
+      path: "/_data/navigation.yml"
       type: "posts"
     values:
       layout: "single"
@@ -108,7 +108,7 @@ share:
 # 自定义变量
 # ========================
 custom:
-  favicon: "/favicon.ico"  # 网站图标
+  favicon: "/assets/bio-photo.jpg"  # 网站图标
   open_graph: true         # 开启OG协议
   twitter_cards: true      # 开启Twitter卡片
   github_edit:
