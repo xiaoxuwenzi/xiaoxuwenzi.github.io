@@ -36,7 +36,7 @@ author:
   links:
     - label: "GitHub"
       icon: "fab fa-github"
-      url: "https://github.com/yourusername"
+      url: "https://github.com/xiaoxuwenzi.github.io"
     - label: "Twitter"
       icon: "fab fa-twitter"
       url: "https://twitter.com/yourhandle"
@@ -70,7 +70,7 @@ plugins:
 # 评论系统（推荐utteranc.es）
 # ========================
 utterances:
-  repo: xiaoxuwenzi/xiaoxuwenzi  # 替换为你的仓库
+  repo: xiaoxuwenzi/xiaoxuwenzi.github.io  # 替换为你的仓库
   issue_term: "pathname"
   theme: "github-light"
 
@@ -112,5 +112,5 @@ custom:
   open_graph: true         # 开启OG协议
   twitter_cards: true      # 开启Twitter卡片
   github_edit:
-    repository: "xiaoxuwenzi/xiaoxuwenzi"  # 启用"编辑此页"功能
+    repository: "xiaoxuwenzi/xiaoxuwenzi.github.io"  # 启用"编辑此页"功能
     branch: "main"
