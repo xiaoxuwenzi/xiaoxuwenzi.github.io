@@ -1,8 +1,8 @@
 title: "我的个人网站"
 description: "记录个人生活与技术分享"
 baseurl: ""
-url: "https://yourwebsite.com"
-logo: "/assets/logo.png"
+url: "https://xiaoxuwenzi.github.io"
+logo: "/assets/images/logo.png"
 
 theme: minima
 
@@ -18,9 +18,9 @@ author:
   email: "你的邮箱"
   links:
     - label: "GitHub"
-      url: "https://github.com/你的用户名"
+      url: "https://github.com/xiaoxuwenzi"
     - label: "Twitter"
-      url: "https://twitter.com/你的用户名"
+      url: "https://twitter.com/xiaoxuwenzi"
 
 defaults:
   - scope:
@@ -62,5 +62,5 @@ custom:
   open_graph: true
   twitter_cards: true
   github_edit:
-    repository: "你的用户名/personal-website"
+    repository: "xiaoxuwenzi/xiaoxuwenzi.github.io"
     branch: "main"
