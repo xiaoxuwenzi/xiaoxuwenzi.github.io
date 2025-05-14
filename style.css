@@ -1,0 +1,245 @@
+:root {
+  /* 颜色变量 */
+  --color-primary: #222;
+  --color-secondary: #666;
+  --color-accent: #3b82f6;
+  --color-light: #f0f2f5;
+  --color-bg: #f7f9fb;
+  --color-white: #fff;
+  --color-gray: #888;
+  --color-border: #eee;
+
+  /* 阴影变量 */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  
+  /* 圆角变量 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  
+  /* 间距变量 */
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+}
+
+/* 基础样式重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  line-height: 1.6;
+}
+
+/* 页眉样式 */
+.site-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: inherit;
+}
+
+/* 导航菜单 */
+.nav-menu {
+  display: flex;
+  gap: var(--space-lg);
+  list-style: none;
+}
+
+.nav-link {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background-color: var(--color-light);
+  outline: 2px solid currentColor;
+}
+
+/* 主内容区 */
+.main-content {
+  width: min(1100px, 100% - 2rem);
+  margin: var(--space-lg) auto;
+  min-height: calc(100vh - 200px); /* 防止页脚上浮 */
+}
+
+/* 卡片列表布局 */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+/* 卡片组件 */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.card-info {
+  padding: 18px 16px;
+}
+
+.card-tag {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  padding: 2px 10px;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.card-desc {
+  color: var(--color-secondary);
+  font-size: 0.98rem;
+}
+
+/* 文章列表 */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.post-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-sm);
+  transition: all 0.3s ease;
+}
+
+.post-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.post-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+}
+
+.post-content {
+  flex: 1;
+}
+
+.post-title {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.post-meta {
+  color: var(--color-gray);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.post-excerpt {
+  color: var(--color-secondary);
+  font-size: 1rem;
+}
+
+/* 页脚 */
+.footer {
+  text-align: center;
+  padding: var(--space-sm) 0;
+  background: var(--color-white);
+  color: var(--color-gray);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-lg);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: var(--space-sm);
+  }
+  
+  .card-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .post-card {
+    flex-direction: column;
+  }
+  
+  .post-thumb {
+    width: 100%;
+    height: auto;
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@media (min-width: 769px) {
+  .post-card {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .post-thumb {
+    width: 120px;
+    height: 90px;
+    margin-bottom: 0;
+  }
+}

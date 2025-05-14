@@ -60,14 +60,13 @@ nav ul li a:hover {
     padding: 0 16px;
 }
 
-/* 修改卡片列表布局，使其自适应 */
 .card-list {
     display: flex;
     gap: 24px;
     margin-bottom: 32px;
 }
 
-/* 确保卡片内容正确显示 */
+
 .card {
     background: #fff;
     border-radius: 18px;
