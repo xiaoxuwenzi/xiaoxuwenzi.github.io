@@ -1,9 +1,9 @@
-# personal-website
+# xiaoxuwenzi.github.io
 这是一个个人网站项目，旨在展示个人作品、博客文章和提供联系信息。该项目包含以下功能和文件结构：
 
 ## 项目结构
 ```
-personal-website
+xiaoxuwenzi.github.io
 ├── _data
 │   └── navigation.yml        # 定义网站的导航菜单
 ├── _posts

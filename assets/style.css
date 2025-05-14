@@ -84,8 +84,9 @@ nav ul li a:hover {
 
 .card img {
     width: 100%;
-    height: 160px; /* 增大高度 */
-    object-fit: cover; /* 或改为 contain 以完整显示图片 */
+    height: 160px;
+    object-fit: contain; /* 改为contain完整显示图片 */
+    background: #f7f9fb; /* 图片不满时的背景色 */
     border-radius: 16px 16px 0 0;
 }
 
