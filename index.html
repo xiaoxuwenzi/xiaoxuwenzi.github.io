@@ -7,22 +7,61 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <header>
-        <h1>欢迎来到我的个人网站！</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">首页</a></li>
-                <li><a href="pages/about.html">关于我</a></li>
-                <li><a href="pages/categories.html">分类</a></li>
-                <li><a href="pages/contact.html">联系</a></li>
-                <li><a href="_posts/2024-05-20-welcome.md">博客</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="logo">🌀</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="blog.html">文章</a></li>
+                    <li><a href="pages/categories.html">专栏</a></li>
+                    <li><a href="pages/about.html">关于</a></li>
+                    <li><a href="pages/contact.html">留言板</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main>
-        <section>
-            <h2>网站简介</h2>
-            <p>这是我的个人网站，展示我的作品、文章和个人信息。</p>
+    <main class="main-content">
+        <section class="card-list">
+            <!-- 示例卡片，可用for循环替换 -->
+            <div class="card">
+                <img src="assets/images/card1.jpg" alt="卡片1">
+                <div class="card-info">
+                    <span class="card-tag">原创工具</span>
+                    <h3>导航站主题MijiNav</h3>
+                    <p>极速构建简洁美观的导航站点。</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="assets/images/card2.jpg" alt="卡片2">
+                <div class="card-info">
+                    <span class="card-tag">原创工具</span>
+                    <h3>妙记文卡</h3>
+                    <p>Markdown文本一键生成精美卡片。</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="assets/images/card3.jpg" alt="卡片3">
+                <div class="card-info">
+                    <span class="card-tag">原创工具</span>
+                    <h3>设计导航CooHub</h3>
+                    <p>设计师专属导航主页。</p>
+                </div>
+            </div>
+        </section>
+        <section class="post-list">
+            {% for post in site.posts limit:5 %}
+            <div class="post-card">
+                {% if post.image %}
+                <img class="post-thumb" src="{{ post.image }}" alt="{{ post.title }}">
+                {% endif %}
+                <div class="post-content">
+                    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                    <p class="post-meta">文章 · {{ post.date | date: "%Y年%-m月%-d日" }}</p>
+                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 80 }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </section>
     </main>
     <footer>
