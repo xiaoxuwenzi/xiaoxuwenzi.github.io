@@ -43,52 +43,68 @@ body {
   line-height: 1.6;
 }
 
-/* 页眉样式 */
+/* ===== 页眉优化 ===== */
 .site-header {
-  position: sticky;
-  top: 0;
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-sm);
-  z-index: 100;
-  backdrop-filter: blur(5px);
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* 新增优化 */
+    transition: all 0.3s ease;
+    will-change: transform;
 }
-
+.site-header.scrolled {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 .nav-container {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: var(--space-sm) var(--space-md);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* 新增优化 */
+    position: relative;
 }
-
-.logo {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 700;
-  color: inherit;
+/* ===== 导航菜单优化 ===== */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;  /* 微调间距 */
+    margin: 0;
+    padding: 0;
 }
-
-/* 导航菜单 */
-.nav-menu {
-  display: flex;
-  gap: var(--space-lg);
-  list-style: none;
+nav ul li a {
+    color: #222;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 新增优化 */
+    position: relative;
+    font-weight: 500;
 }
-
-.nav-link {
-  color: inherit;
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
+nav ul li a:hover {
+    background: #f0f2f5;
+    color: #000;
 }
-
-.nav-link:hover,
-.nav-link:focus {
-  background-color: var(--color-light);
-  outline: 2px solid currentColor;
+/* 新增下划线动画效果 */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #3b82f6;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+nav ul li a:hover::after {
+    width: calc(100% - 32px);
 }
 
 /* 主内容区 */
@@ -100,35 +116,50 @@ body {
 
 /* 卡片列表布局 */
 .card-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    /* 新增优化 */
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 /* 卡片组件 */
 .card {
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.06);
+    overflow: hidden;
+    flex: 1;
+    min-width: 280px;  /* 防止卡片过小 */
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 新增优化 */
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.03);
 }
-
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.12);
+    transform: translateY(-4px);
 }
-
-.card-img {
-  width: 100%;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  display: block;
+.card img {
+    width: 100%;
+    height: 180px;  /* 稍增加高度 */
+    object-fit: cover;
+    display: block;
+    /* 新增优化 */
+    transition: transform 0.3s ease;
 }
-
+.card:hover img {
+    transform: scale(1.02);
+}
 .card-info {
-  padding: 18px 16px;
+    padding: 20px 18px;
+    /* 新增优化 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-tag {
@@ -212,34 +243,24 @@ body {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .nav-menu {
-    gap: var(--space-sm);
-  }
-  
-  .card-list {
-    grid-template-columns: 1fr;
-  }
-  
-  .post-card {
-    flex-direction: column;
-  }
-  
-  .post-thumb {
-    width: 100%;
-    height: auto;
-    margin-bottom: var(--space-sm);
-  }
+    .nav-container {
+        padding: 12px 16px;
+    }
+    
+    nav ul {
+        gap: 16px;
+    }
+    
+    .card-list {
+        gap: 16px;
+    }
+    
+    .card {
+        min-width: calc(50% - 8px);  /* 两列布局 */
+    }
 }
-
-@media (min-width: 769px) {
-  .post-card {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  
-  .post-thumb {
-    width: 120px;
-    height: 90px;
-    margin-bottom: 0;
-  }
+@media (max-width: 480px) {
+    .card {
+        min-width: 100%;  /* 单列布局 */
+    }
 }
