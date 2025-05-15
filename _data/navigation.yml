@@ -1,12 +1,11 @@
-- name: 首页
-  link: /
-- name: 博客
-  link: /blog/
-- name: 关于
-  link: /pages/about.html
-- name: 分类
-  link: /pages/categories.html
-- name: 联系
-  link: /pages/contact.html
-- name: 上传
-  link: /pages/upload.html
+- title: 首页
+  url: /
+- title: 文章
+  url: /blog.html
+- title: 专栏
+  url: /pages/categories.html
+- title: 关于
+  url: /pages/about.html
+- title: 留言板
+  url: /pages/contact.html
+
