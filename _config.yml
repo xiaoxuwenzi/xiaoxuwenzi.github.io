@@ -4,7 +4,7 @@ baseurl: ""
 url: "https://xiaoxuwenzi.github.io"
 logo: "/assets/images/logo.png"
 
-theme: minima
+# theme: minima
 
 lang: zh-CN
 timezone: Asia/Shanghai
