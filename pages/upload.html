@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上传图片 - 个人网站</title>
-    <link rel="stylesheet" href="../assets/style.css">
-</head>
-<body>
-    <header>
-        <h1>上传图片</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="../pages/about.html">关于我</a></li>
-                <li><a href="../pages/categories.html">分类</a></li>
-                <li><a href="../pages/contact.html">联系</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
+---
+layout: default
+title: 上传说明
+---
+<main class="main-content container">
+    <article class="page-content">
+        <header class="page-header">
+            <h1>{{ page.title }}</h1>
+        </header>
         <section>
-            <h2>选择要上传的图片</h2>
+            <h2>关于文件上传</h2>
+            <p>此页面原设计用于图片上传。但由于本网站是静态网站 (由 Jekyll 生成并托管在 GitHub Pages)，无法直接处理服务器端的上传操作。</p>
+            <p>如果您需要向博客文章中添加图片，通常的流程是：</p>
+            <ol>
+                <li>将图片文件手动添加到您项目仓库的 `assets/images` 目录下。</li>
+                <li>在您的 Markdown 文章中，使用相对路径引用该图片，例如：`![图片描述]({{ "/assets/images/your-image-name.jpg" | relative_url }})`。</li>
+                <li>提交更改并推送到 GitHub，GitHub Pages 会自动重新构建您的网站。</li>
+            </ol>
+            <p>如果您有其他关于管理网站内容的疑问，欢迎随时提出。</p>
+            <!-- Original form commented out as it's non-functional on a static site -->
+            <!-- 
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <input type="file" name="image" accept="image/*" required>
                 <button type="submit">上传</button>
             </form>
+            -->
         </section>
-    </main>
-    <footer>
-        <p>版权所有 &copy; 2025</p>
-    </footer>
-</body>
-</html>
+    </article>
+</main>
+

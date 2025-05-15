@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章分类</title>
-    <link rel="stylesheet" href="../assets/style.css">
-</head>
-<body>
-    <header>
-        <h1>文章分类</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="about.html">关于我</a></li>
-                <li><a href="../_posts/2024-05-20-welcome.md">文章</a></li>
-                <li><a href="contact.html">联系</a></li>
-                <li><a href="categories.html">分类</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
+---
+layout: default
+title: 文章分类
+---
+<main class="main-content container">
+    <article class="page-content">
+        <header class="page-header">
+            <h1>{{ page.title }}</h1>
+        </header>
         <section>
             <h2>分类列表</h2>
-            <ul>
-                <li><a href="#">技术</a></li>
-                <li><a href="#">生活</a></li>
-                <li><a href="#">学习</a></li>
-                <li><a href="#">旅行</a></li>
-            </ul>
+            <p>此页面用于展示文章分类。Jekyll 的归档插件 (jekyll-archives) 已在 `_config.yml` 中配置，可以自动生成按年份和标签归档的页面。如果需要按自定义分类展示，可以进一步配置或手动创建链接。</p>
+            <p>目前的 `_config.yml` 配置了 `jekyll-archives` 来处理 `year` 和 `tags` 归档，访问路径分别为 `{{ site.baseurl }}/archives/:year/` 和 `{{ site.baseurl }}/tags/:tag/`。</p>
+            <p>您可以考虑使用标签云或更详细的分类列表来丰富此页面。以下是如何手动列出所有标签的示例：</p>
+            
+            <h3>所有标签</h3>
+            <div class="all-tags">
+                {% for tag in site.tags %}
+                <a href="{{ site.baseurl }}/tags/#{{ tag[0] | slugify }}" class="post-tag">#{{ tag[0] }} ({{ tag[1].size }})</a>
+                {% endfor %}
+            </div>
+
+            <h3>所有分类</h3>
+            <div class="all-categories">
+                {% for category in site.categories %}
+                <a href="{{ site.baseurl }}/categories/#{{ category[0] | slugify }}" class="post-tag">{{ category[0] }} ({{ category[1].size }})</a>
+                {% endfor %}
+            </div>
         </section>
-    </main>
-    <footer>
-        <p>版权所有 &copy; 2025</p>
-    </footer>
-</body>
-</html>
+    </article>
+</main>
+
