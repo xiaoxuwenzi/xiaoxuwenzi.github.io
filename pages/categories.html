@@ -1,32 +1,108 @@
 ---
-layout: default
+# layout: default # This line is intentionally commented out or removed as per new strategy
 title: 文章分类
 ---
-<main class="main-content container">
-    <article class="page-content">
-        <header class="page-header">
-            <h1>{{ page.title }}</h1>
-        </header>
-        <section>
-            <h2>分类列表</h2>
-            <p>此页面用于展示文章分类。Jekyll 的归档插件 (jekyll-archives) 已在 `_config.yml` 中配置，可以自动生成按年份和标签归档的页面。如果需要按自定义分类展示，可以进一步配置或手动创建链接。</p>
-            <p>目前的 `_config.yml` 配置了 `jekyll-archives` 来处理 `year` 和 `tags` 归档，访问路径分别为 `{{ site.baseurl }}/archives/:year/` 和 `{{ site.baseurl }}/tags/:tag/`。</p>
-            <p>您可以考虑使用标签云或更详细的分类列表来丰富此页面。以下是如何手动列出所有标签的示例：</p>
-            
-            <h3>所有标签</h3>
-            <div class="all-tags">
-                {% for tag in site.tags %}
-                <a href="{{ site.baseurl }}/tags/#{{ tag[0] | slugify }}" class="post-tag">#{{ tag[0] }} ({{ tag[1].size }})</a>
-                {% endfor %}
-            </div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - 我的个人网站</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <!-- <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon"> -->
+</head>
+<body>
 
-            <h3>所有分类</h3>
-            <div class="all-categories">
-                {% for category in site.categories %}
-                <a href="{{ site.baseurl }}/categories/#{{ category[0] | slugify }}" class="post-tag">{{ category[0] }} ({{ category[1].size }})</a>
-                {% endfor %}
+<header class="site-header uicook-header">
+    <div class="uicook-container nav-container-override">
+        <div class="logo-nav-group">
+            <div class="logo">
+                <a href="/"><img src="/assets/images/logo.svg" alt="网站Logo" class="uicook-logo-img" /></a>
             </div>
-        </section>
-    </article>
+            <nav class="uicook-nav">
+                <ul class="uicook-nav-list">
+                    <li class="uicook-nav-item"><a href="/">首页</a></li>
+                    <li class="uicook-nav-item"><a href="/blog.html">文章</a></li>
+                    <li class="uicook-nav-item"><a href="/pages/categories.html" class="active">工具</a></li> <!-- '工具' is 'categories.html', so it should be active -->
+                    <li class="uicook-nav-item"><a href="/pages/about.html">专题</a></li>
+                    <li class="uicook-nav-item"><a href="#">关于</a></li> 
+                    <li class="uicook-nav-item"><a href="/pages/contact.html">留言板</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="uicook-header-actions">
+            <div class="uicook-header-action-item" id="search-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="uicook-search-area" id="search-area" style="display: none;">
+                <input type="text" placeholder="请输入搜索关键词并按回车键…" class="uicook-search-input">
+                <div class="uicook-search-suggestions">
+                    <h4>最近文章</h4>
+                    <ul>
+                        <li><a href="#">2025年独立完成的第一个项目</a></li>
+                        <li><a href="#">随记 - 春节返乡的一些感想</a></li>
+                    </ul>
+                    <h4>近期评论</h4>
+                    <ul>
+                        <li><a href="#">用户A 评论了 文章X</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="uicook-main-content">
+    <div class="uicook-container page-specific-padding">
+        <article class="page-content uicook-standard-page-content">
+            <header class="uicook-page-header">
+                <h1>{{ page.title }}</h1>
+            </header>
+            <section class="uicook-content-section">
+                <h2>分类列表</h2>
+                <p>此页面用于展示文章分类。Jekyll 的归档插件 (jekyll-archives) 已在 `_config.yml` 中配置，可以自动生成按年份和标签归档的页面。如果需要按自定义分类展示，可以进一步配置或手动创建链接。</p>
+                <p>目前的 `_config.yml` 配置了 `jekyll-archives` 来处理 `year` 和 `tags` 归档，访问路径分别为 `{{ site.baseurl }}/archives/:year/` 和 `{{ site.baseurl }}/tags/:tag/`。</p>
+                <p>您可以考虑使用标签云或更详细的分类列表来丰富此页面。以下是如何手动列出所有标签的示例：</p>
+                
+                <h3>所有标签</h3>
+                <div class="all-tags uicook-tags-list">
+                    {% for tag in site.tags %}
+                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] | slugify }}" class="post-tag uicook-tag-item">#{{ tag[0] }} ({{ tag[1].size }})</a>
+                    {% endfor %}
+                </div>
+
+                <h3>所有分类</h3>
+                <div class="all-categories uicook-categories-list">
+                    {% for category in site.categories %}
+                    <a href="{{ site.baseurl }}/categories/#{{ category[0] | slugify }}" class="post-tag uicook-category-item">{{ category[0] }} ({{ category[1].size }})</a>
+                    {% endfor %}
+                </div>
+            </section>
+        </article>
+    </div>
 </main>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchIconContainer = document.getElementById("search-icon-container");
+    const searchArea = document.getElementById("search-area");
+
+    if (searchIconContainer && searchArea) {
+        searchIconContainer.addEventListener("click", function(event) {
+            event.stopPropagation();
+            if (searchArea.style.display === "none" || searchArea.style.display === "") {
+                searchArea.style.display = "block";
+            } else {
+                searchArea.style.display = "none";
+            }
+        });
+        document.addEventListener("click", function(event) {
+            if (!searchArea.contains(event.target) && !searchIconContainer.contains(event.target)) {
+                searchArea.style.display = "none";
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

@@ -359,3 +359,157 @@ body {
 }
 
 
+
+
+
+/********* Search Area Styles *********/
+.uicook-search-area {
+    position: absolute;
+    top: 55px; /* Adjust as needed, below header */
+    right: 15px;
+    width: 320px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    z-index: 1001; /* Ensure it's above other header content but potentially below modals */
+    border: 1px solid #E5E7EB;
+}
+
+.uicook-search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+.uicook-search-input:focus {
+    border-color: #3B82F6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.uicook-search-suggestions h4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.uicook-search-suggestions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px 0;
+}
+
+.uicook-search-suggestions ul li a {
+    display: block;
+    padding: 6px 0;
+    font-size: 13px;
+    color: #4B5563;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.uicook-search-suggestions ul li a:hover {
+    color: #1D4ED8;
+    background-color: #F3F4F6;
+}
+
+
+/* Add styles for generic page content to ensure consistency */
+.uicook-standard-page-content {
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0,0,0,0.01);
+    margin-bottom: 20px;
+}
+
+.uicook-page-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E5E7EB;
+    padding-bottom: 15px;
+}
+
+.uicook-content-section h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1F2937;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.uicook-content-section h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #374151;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.uicook-content-section p,
+.uicook-content-section ul,
+.uicook-content-section ol {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #3c434a;
+    margin-bottom: 15px;
+}
+
+.uicook-content-section ul,
+.uicook-content-section ol {
+    padding-left: 20px;
+}
+
+.uicook-content-section a {
+    color: #1D4ED8;
+    text-decoration: none;
+}
+
+.uicook-content-section a:hover {
+    text-decoration: underline;
+}
+
+/* Padding for main content area on standard pages */
+.page-specific-padding {
+    padding-top: 20px; /* Add some space below the fixed header */
+    padding-bottom: 20px;
+}
+
+
+/* Styles for tags and categories lists */
+.uicook-tags-list,
+.uicook-categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.uicook-tag-item,
+.uicook-category-item {
+    background-color: #F3F4F6;
+    color: #374151;
+    padding: 5px 12px;
+    border-radius: 15px; /* Pill shape */
+    font-size: 13px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.uicook-tag-item:hover,
+.uicook-category-item:hover {
+    background-color: #E5E7EB;
+    color: #1F2937;
+}
+

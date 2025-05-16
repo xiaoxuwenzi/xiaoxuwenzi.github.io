@@ -1,6 +1,7 @@
 ---
 # layout: default # This line is intentionally commented out or removed as per new strategy
-title: 联系我
+title: 页面未找到 (404)
+permalink: /404.html # Ensures this page is served as 404.html
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -26,7 +27,7 @@ title: 联系我
                     <li class="uicook-nav-item"><a href="/pages/categories.html">工具</a></li>
                     <li class="uicook-nav-item"><a href="/pages/about.html">专题</a></li>
                     <li class="uicook-nav-item"><a href="#">关于</a></li> 
-                    <li class="uicook-nav-item"><a href="/pages/contact.html" class="active">留言板</a></li> <!-- '留言板' is 'contact.html', so it should be active -->
+                    <li class="uicook-nav-item"><a href="/pages/contact.html">留言板</a></li>
                 </ul>
             </nav>
         </div>
@@ -54,32 +55,18 @@ title: 联系我
 
 <main class="uicook-main-content">
     <div class="uicook-container page-specific-padding">
-        <article class="page-content uicook-standard-page-content">
+        <article class="page-content uicook-standard-page-content uicook-404-content">
             <header class="uicook-page-header">
                 <h1>{{ page.title }}</h1>
             </header>
             <section class="uicook-content-section">
-                <h2>联系方式</h2>
-                <p>如果您有任何问题或建议，请通过以下方式与我联系：</p>
+                <p>抱歉，您要查找的页面不存在或已被移动。</p>
+                <p>您可以尝试：</p>
                 <ul>
-                    <li>电子邮件: <a href="mailto:{{ site.author.email | default: 'your-email@example.com' }}">{{ site.author.email | default: "your-email@example.com" }}</a></li>
-                    <!-- Consider adding other contact methods if available in _config.yml or as plain text -->
+                    <li>检查网址是否正确。</li>
+                    <li>返回<a href="/">首页</a>。</li>
+                    <li>使用上方的搜索功能查找内容。</li>
                 </ul>
-            </section>
-            <section class="uicook-content-section">
-                <h2>留言</h2>
-                <p>静态网站无法直接处理表单提交。您可以考虑使用第三方表单服务 (例如 Formspree, Netlify Forms) 或通过上述电子邮件联系我。</p>
-                <!-- 
-                <form action="#" method="post">
-                    <label for="name">姓名:</label>
-                    <input type="text" id="name" name="name" required>
-                    
-                    <label for="message">留言:</label>
-                    <textarea id="message" name="message" required></textarea>
-                    
-                    <button type="submit">提交</button>
-                </form>
-                -->
             </section>
         </article>
     </div>

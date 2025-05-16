@@ -29,9 +29,24 @@
             </nav>
         </div>
         <div class="uicook-header-actions">
-            <!-- Placeholder for right-side icons like search or theme toggle -->
-            <div class="uicook-header-action-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <div class="uicook-header-action-item" id="search-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="uicook-search-area" id="search-area" style="display: none;">
+                <input type="text" placeholder="请输入搜索关键词并按回车键…" class="uicook-search-input">
+                <div class="uicook-search-suggestions">
+                    <h4>最近文章</h4>
+                    <ul>
+                        <!-- Placeholder for recent posts -->
+                        <li><a href="#">2025年独立完成的第一个项目</a></li>
+                        <li><a href="#">随记 - 春节返乡的一些感想</a></li>
+                    </ul>
+                    <h4>近期评论</h4>
+                    <ul>
+                        <!-- Placeholder for recent comments -->
+                        <li><a href="#">用户A 评论了 文章X</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -66,36 +81,26 @@
 
         <!-- Recent Articles Section -->
         <section class="uicook-article-section">
-            <h2 class="uicook-section-title">2025年独立完成的第一个项目</h2> 
+            <h2 class="uicook-section-title">最近文章</h2> 
             <div class="uicook-article-list-container">
+                {% for post in site.posts limit:5 %}
                 <article class="uicook-article-card">
-                    <a href="#" class="uicook-article-card-thumbnail-link">
+                    <a href="{{ post.url | relative_url }}" class="uicook-article-card-thumbnail-link">
                         图片区域
                     </a>
                     <div class="uicook-article-card-content">
-                        <h3 class="uicook-article-card-title"><a href="#">2025年独立完成的第一个项目</a></h3>
-                        <p class="uicook-article-card-excerpt">前言 近年来,一直在使用自己搭建的个人网址导航主页。我把导航页作为常用浏览器的主页，几乎每天都有在使用。对于个人来说，感觉还是蛮方便的，无论在家里、公司，用的设备是PC还是Mac，使用的浏览器是Edge还...</p>
+                        <h3 class="uicook-article-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                        <p class="uicook-article-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
                         <div class="uicook-article-card-meta">
-                            <span>文章</span> 
-                            <span class="uicook-article-card-meta-divider">·</span>
-                            <span>1 月前</span>
+                            {% if post.categories.size > 0 %}
+                                <span>{{ post.categories | first }}</span> 
+                                <span class="uicook-article-card-meta-divider">·</span>
+                            {% endif %}
+                            <span>{{ post.date | date: "%Y年%-m月%-d日" }}</span>
                         </div>
                     </div>
                 </article>
-                <article class="uicook-article-card">
-                    <a href="#" class="uicook-article-card-thumbnail-link">
-                        图片区域
-                    </a>
-                    <div class="uicook-article-card-content">
-                        <h3 class="uicook-article-card-title"><a href="#">随记 - 春节返乡的一些感想</a></h3>
-                        <p class="uicook-article-card-excerpt">不知不觉，马上到元宵了，过了十五，年味就散了，感觉就不再是新年咯。今年春节回老家，感触还是有点深的，闲来记录一下。一年中人最齐的团聚 今年在新家过年，年初三才出发回老家。家里人基本都在年前回去了，就...</p>
-                        <div class="uicook-article-card-meta">
-                            <span>随记</span> 
-                            <span class="uicook-article-card-meta-divider">·</span>
-                            <span>3 月前</span>
-                        </div>
-                    </div>
-                </article>
+                {% endfor %}
             </div>
         </section>
     </div>
@@ -104,3 +109,31 @@
 </body>
 </html>
 
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchIconContainer = document.getElementById('search-icon-container');
+    const searchArea = document.getElementById('search-area');
+
+    if (searchIconContainer && searchArea) {
+        searchIconContainer.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevents click from immediately closing if search area is part of a larger clickable area
+            if (searchArea.style.display === 'none' || searchArea.style.display === '') {
+                searchArea.style.display = 'block';
+            } else {
+                searchArea.style.display = 'none';
+            }
+        });
+
+        // Optional: Close the search area if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!searchArea.contains(event.target) && !searchIconContainer.contains(event.target)) {
+                searchArea.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

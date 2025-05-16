@@ -1,30 +1,107 @@
 ---
-layout: default
+# layout: default # This line is intentionally commented out or removed as per new strategy
 title: 上传说明
 ---
-<main class="main-content container">
-    <article class="page-content">
-        <header class="page-header">
-            <h1>{{ page.title }}</h1>
-        </header>
-        <section>
-            <h2>关于文件上传</h2>
-            <p>此页面原设计用于图片上传。但由于本网站是静态网站 (由 Jekyll 生成并托管在 GitHub Pages)，无法直接处理服务器端的上传操作。</p>
-            <p>如果您需要向博客文章中添加图片，通常的流程是：</p>
-            <ol>
-                <li>将图片文件手动添加到您项目仓库的 `assets/images` 目录下。</li>
-                <li>在您的 Markdown 文章中，使用相对路径引用该图片，例如：`![图片描述]({{ "/assets/images/your-image-name.jpg" | relative_url }})`。</li>
-                <li>提交更改并推送到 GitHub，GitHub Pages 会自动重新构建您的网站。</li>
-            </ol>
-            <p>如果您有其他关于管理网站内容的疑问，欢迎随时提出。</p>
-            <!-- Original form commented out as it's non-functional on a static site -->
-            <!-- 
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" accept="image/*" required>
-                <button type="submit">上传</button>
-            </form>
-            -->
-        </section>
-    </article>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - 我的个人网站</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <!-- <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon"> -->
+</head>
+<body>
+
+<header class="site-header uicook-header">
+    <div class="uicook-container nav-container-override">
+        <div class="logo-nav-group">
+            <div class="logo">
+                <a href="/"><img src="/assets/images/logo.svg" alt="网站Logo" class="uicook-logo-img" /></a>
+            </div>
+            <nav class="uicook-nav">
+                <ul class="uicook-nav-list">
+                    <li class="uicook-nav-item"><a href="/">首页</a></li>
+                    <li class="uicook-nav-item"><a href="/blog.html">文章</a></li>
+                    <li class="uicook-nav-item"><a href="/pages/categories.html">工具</a></li>
+                    <li class="uicook-nav-item"><a href="/pages/about.html">专题</a></li>
+                    <li class="uicook-nav-item"><a href="#">关于</a></li> 
+                    <li class="uicook-nav-item"><a href="/pages/contact.html">留言板</a></li>
+                    <!-- Assuming 'upload.html' is not a primary nav item, so no 'active' class here -->
+                </ul>
+            </nav>
+        </div>
+        <div class="uicook-header-actions">
+            <div class="uicook-header-action-item" id="search-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="uicook-search-area" id="search-area" style="display: none;">
+                <input type="text" placeholder="请输入搜索关键词并按回车键…" class="uicook-search-input">
+                <div class="uicook-search-suggestions">
+                    <h4>最近文章</h4>
+                    <ul>
+                        <li><a href="#">2025年独立完成的第一个项目</a></li>
+                        <li><a href="#">随记 - 春节返乡的一些感想</a></li>
+                    </ul>
+                    <h4>近期评论</h4>
+                    <ul>
+                        <li><a href="#">用户A 评论了 文章X</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="uicook-main-content">
+    <div class="uicook-container page-specific-padding">
+        <article class="page-content uicook-standard-page-content">
+            <header class="uicook-page-header">
+                <h1>{{ page.title }}</h1>
+            </header>
+            <section class="uicook-content-section">
+                <h2>关于文件上传</h2>
+                <p>此页面原设计用于图片上传。但由于本网站是静态网站 (由 Jekyll 生成并托管在 GitHub Pages)，无法直接处理服务器端的上传操作。</p>
+                <p>如果您需要向博客文章中添加图片，通常的流程是：</p>
+                <ol>
+                    <li>将图片文件手动添加到您项目仓库的 `assets/images` 目录下。</li>
+                    <li>在您的 Markdown 文章中，使用相对路径引用该图片，例如：`![图片描述]({{ "/assets/images/your-image-name.jpg" | relative_url }})`。</li>
+                    <li>提交更改并推送到 GitHub，GitHub Pages 会自动重新构建您的网站。</li>
+                </ol>
+                <p>如果您有其他关于管理网站内容的疑问，欢迎随时提出。</p>
+                <!-- Original form commented out as it's non-functional on a static site -->
+                <!-- 
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" accept="image/*" required>
+                    <button type="submit">上传</button>
+                </form>
+                -->
+            </section>
+        </article>
+    </div>
 </main>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchIconContainer = document.getElementById("search-icon-container");
+    const searchArea = document.getElementById("search-area");
+
+    if (searchIconContainer && searchArea) {
+        searchIconContainer.addEventListener("click", function(event) {
+            event.stopPropagation();
+            if (searchArea.style.display === "none" || searchArea.style.display === "") {
+                searchArea.style.display = "block";
+            } else {
+                searchArea.style.display = "none";
+            }
+        });
+        document.addEventListener("click", function(event) {
+            if (!searchArea.contains(event.target) && !searchIconContainer.contains(event.target)) {
+                searchArea.style.display = "none";
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
