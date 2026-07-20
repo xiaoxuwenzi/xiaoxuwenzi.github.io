@@ -4,6 +4,8 @@
 
 🌐 **访问地址**:https://xiaoxuwenzi.github.io
 
+> **🤖 AI 助手请先阅读 [`AI-GUIDE.md`](./AI-GUIDE.md)** — 包含完整的数据结构、操作流程、代码示例,读完即可独立管理本网站。
+
 ## 仓库结构
 
 ```
