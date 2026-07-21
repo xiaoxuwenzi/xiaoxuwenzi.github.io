@@ -164,8 +164,8 @@
         </div>
 
         <div class="form-group">
-          <label for="post-content">正文内容 (支持 HTML / Markdown 结构) *</label>
-          <textarea id="post-content" class="form-control" placeholder="请输入文章正文内容...可点击上方区直接插入本地图片。"></textarea>
+          <label for="post-content">正文内容 (直接输入纯文本段落即可) *</label>
+          <textarea id="post-content" class="form-control" placeholder="这里直接填写文字内容。按回车换行，系统会自动生成好看的排版。图片可通过上方区直接上传。"></textarea>
         </div>
       </div>
 
@@ -450,6 +450,19 @@
       const slug = title.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').slice(0, 30) || 'article';
       const targetPath = currentPostPath || `posts/${today}-${slug}.html`;
 
+      // 转换纯文本段落为语义化 HTML（按双换行或单换行分段，保留标签）
+      const formattedBody = content
+        .split(/\n\s*\n/)
+        .map(paragraph => {
+          const trimmed = paragraph.trim();
+          if (!trimmed) return '';
+          if (trimmed.startsWith('<img') || trimmed.startsWith('<h') || trimmed.startsWith('<div')) {
+            return trimmed;
+          }
+          return `<p style="margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.8; color: #1a1b1f;">${trimmed.replace(/\n/g, '<br>')}</p>`;
+        })
+        .join('\n');
+
       // 简单组装 HTML
       const fullHtml = `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -458,19 +471,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title} — AI 资讯</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.8; color: #1a1b1f; background: #f9f9f2; }
-    h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    .meta { color: #6b6b66; font-size: 0.9rem; margin-bottom: 2rem; border-bottom: 1px solid #e3e3d8; padding-bottom: 0.5rem; }
-    a { color: #ed3a38; text-decoration: none; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 2.5rem auto; padding: 0 1.25rem; line-height: 1.8; color: #1a1b1f; background: #f9f9f2; }
+    h1 { font-family: Georgia, serif; font-size: 2.2rem; margin-bottom: 0.5rem; color: #1a1b1f; }
+    .meta { font-family: monospace; color: #6b6b66; font-size: 0.88rem; margin-bottom: 2rem; border-bottom: 1px solid #e3e3d8; padding-bottom: 0.75rem; }
+    .subtitle { font-style: italic; color: #6b6b66; font-size: 1.1rem; margin-bottom: 1.5rem; }
+    a { color: #ed3a38; text-decoration: none; font-family: monospace; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; border-radius: 4px; margin: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
   </style>
 </head>
 <body>
   <a href="../index.html">← 返回首页</a>
-  <h1>${title}</h1>
+  <h1 style="margin-top:1.5rem;">${title}</h1>
   <div class="meta">分类: ${cat} | 发布时间: ${today} ${tags ? '| 标签: ' + tags : ''}</div>
-  ${subtitle ? `<p><em>${subtitle}</em></p>` : ''}
-  <hr style="border:none; border-top:1px solid #e3e3d8; margin:1.5rem 0;">
-  <main>${content}</main>
+  ${subtitle ? `<p class="subtitle">${subtitle}</p>` : ''}
+  <main style="margin-top:1.5rem;">${formattedBody}</main>
 </body>
 </html>`;
 
