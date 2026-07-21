@@ -3,7 +3,7 @@
 import os
 import html as _html
 
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'posts')
+OUT_DIR = r'e:\临时\posts'
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # ========================================

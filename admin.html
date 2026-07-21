@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网站后台管理系统 — AI 资讯博客</title>
+  <style>
+    /* ===== 设计系统（与主页 index.html 完美保持一致） ===== */
+    :root {
+      --bg: #f9f9f2; --bg2: #f3f3ea; --bg3: #ffffff;
+      --ink: #1a1b1f; --muted: #6b6b66; --rule: #e3e3d8;
+      --accent: #ed3a38; --accent-soft: rgba(237, 58, 56, 0.10);
+      --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-serif: 'Lyontext web', 'Source Han Serif SC', 'Noto Serif SC', 'Songti SC', Georgia, serif;
+      --font-mono: 'Graphik', 'SF Mono', Consolas, 'Courier New', monospace;
+      --max: 1200px; --t: 0.22s ease;
+    }
+    [data-theme="dark"] {
+      --bg: #1a1b1f; --bg2: #23242a; --bg3: #2a2b31;
+      --ink: #f9f9f2; --muted: #9a9a93; --rule: #383940;
+      --accent: #ff5454; --accent-soft: rgba(255, 84, 84, 0.14);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); line-height: 1.6; transition: background var(--t), color var(--t); }
+    a { color: var(--ink); text-decoration: none; }
+    button, input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+
+    /* Layout */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    header { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; }
+    .logo .q { color: var(--accent); }
+    .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9rem; cursor: pointer; border: 1px solid var(--rule); background: var(--bg3); transition: all var(--t); }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn-sm { padding: 0.35rem 0.75rem; font-size: 0.82rem; }
+    .btn-danger { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); }
+    .btn-danger:hover { background: var(--accent); color: #fff; }
+
+    /* Main Section */
+    .main-grid { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; padding: 2rem 0 4rem; }
+    @media (max-width: 860px) { .main-grid { grid-template-columns: 1fr; } }
+
+    .card { background: var(--bg3); border: 1px solid var(--rule); border-radius: 6px; padding: 1.5rem; }
+    .card-title { font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Config Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 200; opacity: 0; visibility: hidden; transition: all var(--t); }
+    .modal-overlay.show { opacity: 1; visibility: visible; }
+    .modal { background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; width: 90%; max-width: 480px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    .modal-h2 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; font-weight: 400; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .form-control { width: 100%; padding: 0.6rem 0.85rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg3); font-family: var(--font-mono); font-size: 0.95rem; }
+    .form-control:focus { outline: none; border-color: var(--accent); }
+    textarea.form-control { resize: vertical; min-height: 180px; font-family: var(--font-sans); }
+
+    /* Post List Sidebar */
+    .post-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; max-height: 70vh; overflow-y: auto; padding-right: 0.3rem; }
+    .post-item { padding: 0.85rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg); cursor: pointer; transition: all var(--t); }
+    .post-item:hover, .post-item.active { border-color: var(--accent); background: var(--bg2); }
+    .post-item-title { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.3rem; }
+    .post-item-meta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); display: flex; justify-content: space-between; }
+
+    /* Editor Area */
+    .editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .editor-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; }
+    .editor-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
+    .tab-btn { background: transparent; border: none; font-family: var(--font-mono); font-size: 0.9rem; padding: 0.3rem 0.8rem; cursor: pointer; color: var(--muted); border-radius: 4px; }
+    .tab-btn.active { color: var(--accent); background: var(--accent-soft); }
+
+    /* Upload Area */
+    .upload-zone { border: 2px dashed var(--rule); border-radius: 6px; padding: 1.2rem; text-align: center; background: var(--bg2); cursor: pointer; transition: all var(--t); margin-bottom: 1.2rem; }
+    .upload-zone:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .upload-zone input { display: none; }
+    .upload-icon { font-size: 1.8rem; color: var(--accent); margin-bottom: 0.3rem; }
+    .preview-img-wrap { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    .preview-thumb { width: 80px; height: 60px; border-radius: 4px; object-fit: cover; border: 1px solid var(--rule); }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 0.75rem 1.5rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.88rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; transition: all var(--t); z-index: 300; }
+    .toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">AI 资讯<span class="q">.后台</span></a>
+      <div class="header-actions">
+        <button class="btn btn-sm" id="btn-config">⚙️ 设置 GitHub</button>
+        <button class="btn btn-sm btn-primary" id="btn-new">+ 新建文章</button>
+        <a href="index.html" class="btn btn-sm" target="_blank">🌐 前往主页</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container main-grid">
+
+    <!-- Sidebar: Posts List -->
+    <aside class="card">
+      <div class="card-title">
+        <span>已发布文章</span>
+        <button class="btn btn-sm" id="btn-refresh" title="刷新列表">🔄</button>
+      </div>
+      <ul class="post-list" id="post-list">
+        <li style="padding:1rem; text-align:center; color:var(--muted); font-family:var(--font-mono); font-size:0.85rem;">
+          载入中或尚未配置 GitHub...
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Editor -->
+    <section class="card">
+      <div class="editor-header">
+        <h2 class="editor-title" id="editor-heading">撰写新文章</h2>
+        <div class="header-actions">
+          <button class="btn btn-danger btn-sm" id="btn-delete" style="display:none;">🗑️ 删除文章</button>
+          <button class="btn btn-primary" id="btn-save">🚀 提交发布</button>
+        </div>
+      </div>
+
+      <div class="editor-tabs">
+        <button class="tab-btn active" data-tab="edit">编辑内容</button>
+        <button class="tab-btn" data-tab="preview">效果预览</button>
+      </div>
+
+      <!-- Tab: Edit -->
+      <div id="tab-edit-content">
+        <div class="form-group">
+          <label for="post-title">文章标题 *</label>
+          <input type="text" id="post-title" class="form-control" placeholder="例如：2026 年人工智能前沿观察">
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label for="post-cat">文章分类</label>
+            <input type="text" id="post-cat" class="form-control" placeholder="例如：技术 / 商业 / 产品">
+          </div>
+          <div class="form-group">
+            <label for="post-tags">标签 (半角逗号分隔)</label>
+            <input type="text" id="post-tags" class="form-control" placeholder="AI, 开源, 趋势">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="post-subtitle">副标题 / 简短摘要</label>
+          <input type="text" id="post-subtitle" class="form-control" placeholder="用一句话概述核心亮点…">
+        </div>
+
+        <!-- Image Upload Area -->
+        <div class="upload-zone" id="upload-dropzone">
+          <div class="upload-icon">📷</div>
+          <div style="font-family:var(--font-mono); font-size:0.9rem;">点击或拖拽上传图片（相册 / 拍照）</div>
+          <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--muted); margin-top:0.3rem;">支持 JPG, PNG, WEBP，自动提交至 posts/assets/ 目录</div>
+          <input type="file" id="file-input" accept="image/*">
+          <div class="preview-img-wrap" id="img-preview-container"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="post-content">正文内容 (支持 HTML / Markdown 结构) *</label>
+          <textarea id="post-content" class="form-control" placeholder="请输入文章正文内容...可点击上方区直接插入本地图片。"></textarea>
+        </div>
+      </div>
+
+      <!-- Tab: Preview -->
+      <div id="tab-preview-content" style="display:none; padding:1rem; border:1px solid var(--rule); border-radius:4px; background:var(--bg);">
+        <h1 id="pv-title" style="font-family:var(--font-serif); font-size:2rem; margin-bottom:0.5rem;">文章标题预览</h1>
+        <div id="pv-meta" style="font-family:var(--font-mono); font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem;">分类 · 2026-07-21</div>
+        <div id="pv-body" style="line-height:1.8; font-family:var(--font-sans);">正文预览加载中…</div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Modal: GitHub Config -->
+  <div class="modal-overlay" id="config-modal">
+    <div class="modal">
+      <h2 class="modal-h2">⚙️ 配置 GitHub 仓库</h2>
+      <div class="form-group">
+        <label for="cfg-owner">GitHub 用户名 / Owner *</label>
+        <input type="text" id="cfg-owner" class="form-control" placeholder="例如：xiaoxuwenzi">
+      </div>
+      <div class="form-group">
+        <label for="cfg-repo">仓库名称 / Repo *</label>
+        <input type="text" id="cfg-repo" class="form-control" placeholder="例如：xiaoxuwenzi.github.io">
+      </div>
+      <div class="form-group">
+        <label for="cfg-branch">分支名称 / Branch</label>
+        <input type="text" id="cfg-branch" class="form-control" value="main" placeholder="main">
+      </div>
+      <div class="form-group">
+        <label for="cfg-token">GitHub Personal Access Token (PAT) *</label>
+        <input type="password" id="cfg-token" class="form-control" placeholder="ghp_xxxxxxxxxxxx">
+        <small style="font-family:var(--font-mono); font-size:0.75rem; color:var(--muted); display:block; margin-top:0.3rem;">需要包含 `repo` 权限。 Token 仅安全保存在您的手机/电脑浏览器本地。</small>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem;">
+        <button class="btn" id="btn-cfg-cancel">取消</button>
+        <button class="btn btn-primary" id="btn-cfg-save">保存配置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">操作成功</div>
+
+  <script>
+    // ===== 全局状态 =====
+    let currentPostSha = null;
+    let currentPostPath = null;
+
+    // 获取配置
+    function getConfig() {
+      return {
+        owner: localStorage.getItem('gh_owner') || 'xiaoxuwenzi',
+        repo: localStorage.getItem('gh_repo') || 'xiaoxuwenzi.github.io',
+        branch: localStorage.getItem('gh_branch') || 'main',
+        token: localStorage.getItem('gh_token') || ''
+      };
+    }
+
+    // UI 交互绑定
+    const modal = document.getElementById('config-modal');
+    const toastEl = document.getElementById('toast');
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 3000);
+    }
+
+    document.getElementById('btn-config').onclick = () => {
+      const cfg = getConfig();
+      document.getElementById('cfg-owner').value = cfg.owner;
+      document.getElementById('cfg-repo').value = cfg.repo;
+      document.getElementById('cfg-branch').value = cfg.branch;
+      document.getElementById('cfg-token').value = cfg.token;
+      modal.classList.add('show');
+    };
+    document.getElementById('btn-cfg-cancel').onclick = () => modal.classList.remove('show');
+    document.getElementById('btn-cfg-save').onclick = () => {
+      localStorage.setItem('gh_owner', document.getElementById('cfg-owner').value.trim());
+      localStorage.setItem('gh_repo', document.getElementById('cfg-repo').value.trim());
+      localStorage.setItem('gh_branch', document.getElementById('cfg-branch').value.trim() || 'main');
+      localStorage.setItem('gh_token', document.getElementById('cfg-token').value.trim());
+      modal.classList.remove('show');
+      showToast('GitHub 配置已保存');
+      loadPostList();
+    };
+
+    // Tab 切换
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.dataset.tab;
+        if (tab === 'edit') {
+          document.getElementById('tab-edit-content').style.display = 'block';
+          document.getElementById('tab-preview-content').style.display = 'none';
+        } else {
+          document.getElementById('tab-edit-content').style.display = 'none';
+          document.getElementById('tab-preview-content').style.display = 'block';
+          // 更新预览
+          document.getElementById('pv-title').textContent = document.getElementById('post-title').value || '未命名标题';
+          document.getElementById('pv-meta').textContent = `${document.getElementById('post-cat').value || '通用'} · ${new Date().toISOString().split('T')[0]}`;
+          document.getElementById('pv-body').innerHTML = document.getElementById('post-content').value || '<p style="color:var(--muted)">暂无内容...</p>';
+        }
+      };
+    });
+
+    // ===== GitHub API 支持函数 =====
+    async function ghFetch(apiPath, options = {}) {
+      const cfg = getConfig();
+      if (!cfg.token) {
+        modal.classList.add('show');
+        throw new Error('请先配置 GitHub Token');
+      }
+      const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/${apiPath}`;
+      const headers = {
+        'Authorization': `token ${cfg.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        ...(options.headers || {})
+      };
+      const res = await fetch(url, { ...options, headers });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || `请求失败 HTTP ${res.status}`);
+      }
+      return res.json();
+    }
+
+    // 支持 Unicode 的 Base64 编解码
+    function utf8_to_b64(str) {
+      return window.btoa(unescape(encodeURIComponent(str)));
+    }
+    function b64_to_utf8(str) {
+      return decodeURIComponent(escape(window.atob(str)));
+    }
+
+    // ===== 加载文章列表 =====
+    async function loadPostList() {
+      const listEl = document.getElementById('post-list');
+      listEl.innerHTML = '<li style="padding:1rem; text-align:center; color:var(--muted); font-family:var(--font-mono); font-size:0.85rem;">读取远程文章列表中...</li>';
+      try {
+        const files = await ghFetch('contents/posts');
+        const htmlFiles = files.filter(f => f.name.endsWith('.html'));
+        if (htmlFiles.length === 0) {
+          listEl.innerHTML = '<li style="padding:1rem; text-align:center; color:var(--muted); font-family:var(--font-mono); font-size:0.85rem;">posts 目录下暂无 HTML 文章</li>';
+          return;
+        }
+        listEl.innerHTML = '';
+        htmlFiles.sort((a,b) => b.name.localeCompare(a.name)).forEach(file => {
+          const li = document.createElement('li');
+          li.className = 'post-item';
+          li.innerHTML = `
+            <div class="post-item-title">${file.name}</div>
+            <div class="post-item-meta">
+              <span>文件大小: ${(file.size / 1024).toFixed(1)} KB</span>
+            </div>
+          `;
+          li.onclick = () => loadPostDetail(file);
+          listEl.appendChild(li);
+        });
+      } catch (e) {
+        listEl.innerHTML = `<li style="padding:1rem; color:var(--accent); font-family:var(--font-mono); font-size:0.85rem;">加载失败: ${e.message}</li>`;
+      }
+    }
+    document.getElementById('btn-refresh').onclick = loadPostList;
+
+    // ===== 加载单篇文章详情进行编辑 =====
+    async function loadPostDetail(file) {
+      try {
+        showToast(`正在加载 ${file.name}...`);
+        const data = await ghFetch(`contents/${file.path}`);
+        const content = b64_to_utf8(data.content.replace(/\n/g, ''));
+        
+        currentPostSha = data.sha;
+        currentPostPath = file.path;
+
+        // 简单的标题提取规则
+        const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/i);
+        document.getElementById('post-title').value = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '') : file.name;
+        document.getElementById('post-content').value = content;
+        
+        document.getElementById('editor-heading').textContent = '编辑文章';
+        document.getElementById('btn-delete').style.display = 'inline-flex';
+        showToast('文章已加载到编辑器');
+      } catch (e) {
+        showToast(`读取失败: ${e.message}`);
+      }
+    }
+
+    // ===== 新建文章复位 =====
+    document.getElementById('btn-new').onclick = () => {
+      currentPostSha = null;
+      currentPostPath = null;
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-cat').value = '';
+      document.getElementById('post-tags').value = '';
+      document.getElementById('post-subtitle').value = '';
+      document.getElementById('post-content').value = '';
+      document.getElementById('editor-heading').textContent = '撰写新文章';
+      document.getElementById('btn-delete').style.display = 'none';
+      showToast('已重置为新建文章模式');
+    };
+
+    // ===== 图片上传逻辑 =====
+    const dropzone = document.getElementById('upload-dropzone');
+    const fileInput = document.getElementById('file-input');
+
+    dropzone.onclick = (e) => {
+      if (e.target !== fileInput) fileInput.click();
+    };
+    fileInput.onchange = () => handleFiles(fileInput.files);
+
+    dropzone.ondragover = (e) => { e.preventDefault(); dropzone.style.borderColor = 'var(--accent)'; };
+    dropzone.ondragleave = () => { dropzone.style.borderColor = 'var(--rule)'; };
+    dropzone.ondrop = (e) => {
+      e.preventDefault();
+      dropzone.style.borderColor = 'var(--rule)';
+      if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+    };
+
+    async function handleFiles(files) {
+      const file = files[0];
+      if (!file) return;
+      showToast('正在上传图片到 GitHub...');
+
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const base64Content = e.target.result.split(',')[1];
+        const dateStr = new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14);
+        const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const imgPath = `posts/assets/${dateStr}-${cleanName}`;
+        
+        try {
+          const cfg = getConfig();
+          const bodyData = {
+            message: `upload image: ${cleanName}`,
+            content: base64Content,
+            branch: cfg.branch
+          };
+          await ghFetch(`contents/${imgPath}`, {
+            method: 'PUT',
+            body: JSON.stringify(bodyData)
+          });
+
+          // 自动插图到正文
+          const imgTag = `\n<img src="${imgPath}" alt="${cleanName}" style="max-width:100%; border-radius:4px; margin:1rem 0;" />\n`;
+          const ta = document.getElementById('post-content');
+          ta.value += imgTag;
+
+          // 缩略图预览
+          const prevContainer = document.getElementById('img-preview-container');
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'preview-thumb';
+          prevContainer.appendChild(img);
+
+          showToast('图片上传成功，已自动插入正文！');
+        } catch (err) {
+          showToast(`图片上传失败: ${err.message}`);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ===== 提交发布文章 =====
+    document.getElementById('btn-save').onclick = async () => {
+      const title = document.getElementById('post-title').value.trim();
+      const content = document.getElementById('post-content').value.trim();
+      const cat = document.getElementById('post-cat').value.trim() || '随笔';
+      const tags = document.getElementById('post-tags').value.trim();
+      const subtitle = document.getElementById('post-subtitle').value.trim();
+
+      if (!title || !content) {
+        showToast('请填写文章标题和正文');
+        return;
+      }
+
+      showToast('正在提交到 GitHub...');
+
+      // 若为新文章，生成文件名
+      const today = new Date().toISOString().split('T')[0];
+      const slug = title.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').slice(0, 30) || 'article';
+      const targetPath = currentPostPath || `posts/${today}-${slug}.html`;
+
+      // 简单组装 HTML
+      const fullHtml = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title} — AI 资讯</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; line-height: 1.8; color: #1a1b1f; background: #f9f9f2; }
+    h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .meta { color: #6b6b66; font-size: 0.9rem; margin-bottom: 2rem; border-bottom: 1px solid #e3e3d8; padding-bottom: 0.5rem; }
+    a { color: #ed3a38; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <a href="../index.html">← 返回首页</a>
+  <h1>${title}</h1>
+  <div class="meta">分类: ${cat} | 发布时间: ${today} ${tags ? '| 标签: ' + tags : ''}</div>
+  ${subtitle ? `<p><em>${subtitle}</em></p>` : ''}
+  <hr style="border:none; border-top:1px solid #e3e3d8; margin:1.5rem 0;">
+  <main>${content}</main>
+</body>
+</html>`;
+
+      try {
+        const cfg = getConfig();
+        const payload = {
+          message: currentPostSha ? `update post: ${title}` : `add post: ${title}`,
+          content: utf8_to_b64(fullHtml),
+          branch: cfg.branch
+        };
+        if (currentPostSha) payload.sha = currentPostSha;
+
+        await ghFetch(`contents/${targetPath}`, {
+          method: 'PUT',
+          body: JSON.stringify(payload)
+        });
+
+        showToast('🚀 发布成功！GitHub Pages 预计 1 分钟内更新。');
+        loadPostList();
+      } catch (err) {
+        showToast(`发布失败: ${err.message}`);
+      }
+    };
+
+    // ===== 删除文章 =====
+    document.getElementById('btn-delete').onclick = async () => {
+      if (!currentPostPath || !currentPostSha) return;
+      if (!confirm(`确定要删除文章 ${currentPostPath} 吗？`)) return;
+
+      showToast('正在从 GitHub 删除...');
+      try {
+        const cfg = getConfig();
+        await ghFetch(`contents/${currentPostPath}`, {
+          method: 'DELETE',
+          body: JSON.stringify({
+            message: `delete post: ${currentPostPath}`,
+            sha: currentPostSha,
+            branch: cfg.branch
+          })
+        });
+
+        showToast('已成功删除文章');
+        document.getElementById('btn-new').click();
+        loadPostList();
+      } catch (err) {
+        showToast(`删除失败: ${err.message}`);
+      }
+    };
+
+    // 页面加载完成后自动尝试读取列表
+    window.onload = () => {
+      const cfg = getConfig();
+      if (cfg.token) {
+        loadPostList();
+      } else {
+        modal.classList.add('show');
+      }
+    };
+  </script>
+</body>
+</html>
