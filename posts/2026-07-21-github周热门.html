@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub 周热门项目 | 2026-07-14~2026-07-21 — AI 资讯站</title>
+  <meta name="description" content="本周 GitHub Trending 热门项目报告：AI Agent 生态化、Agent 安全、垂直领域 Agent 深入行业流程。">
+  <style>
+    :root {
+      --bg: #fafaf9;
+      --bg2: #f5f5f4;
+      --bg3: #ffffff;
+      --ink: #1c1917;
+      --muted: #78716c;
+      --rule: #e7e5e4;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --accent2: #f59e0b;
+      --accent2-soft: #fef3c7;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      --font-serif: Georgia, 'Times New Roman', 'Songti SC', 'SimSun', 'Source Han Serif SC', serif;
+      --font-mono: 'SF Mono', Consolas, 'Courier New', 'Microsoft YaHei', monospace;
+      --max: 760px;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+      --shadow-lg: 0 10px 30px rgba(28, 25, 23, 0.10), 0 3px 8px rgba(28, 25, 23, 0.06);
+      --transition: 0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--ink); text-decoration: underline; }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* === Header === */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 249, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1180px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+    .logo:hover { text-decoration: none; color: var(--ink); }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent) 0%, #14b8a6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .logo-text { font-weight: 400; }
+    .logo-text .accent { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+
+    /* === Article Hero === */
+    .article-hero {
+      padding: 3.5rem 0 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .article-cat {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding: 0.3rem 0.8rem;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      color: var(--ink);
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .article-meta span::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent2);
+    }
+
+    /* === Article Body === */
+    .article-body {
+      padding: 2.5rem 0 1rem;
+    }
+    .article-body > p:first-of-type {
+      font-size: 1.15rem;
+      color: var(--ink);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+    }
+    .article-body h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--rule);
+    }
+    .article-body h2:first-of-type {
+      margin-top: 0;
+    }
+    .article-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .article-body p {
+      font-size: 1rem;
+      color: var(--ink);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--ink);
+      background: var(--accent-soft);
+      border-radius: 0 8px 8px 0;
+    }
+    .article-body ul {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    .article-body ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+    .article-body ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .article-body strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .article-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--bg2);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    /* === Project Card === */
+    .project {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      transition: all var(--transition);
+    }
+    .project:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .project-name {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+    }
+    .project-name a {
+      color: var(--ink);
+    }
+    .project-name a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .project-stars {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent2);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .project-lang {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* === Section label === */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* === Back button === */
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 3rem 0 2rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: all var(--transition);
+    }
+    .back-to-home:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* === AI note === */
+    .ai-note {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--accent2-soft);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #92400e;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    /* === Footer === */
+    .site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem 0 2rem;
+      background: var(--bg2);
+      margin-top: 2rem;
+    }
+    .site-header .container,
+    .site-footer .container {
+      max-width: 1180px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a:not(.back-to-home) { display: none; }
+      .article-hero { padding: 2.5rem 0 1.5rem; }
+      .article-body { padding: 2rem 0 1rem; }
+      .article-body > p:first-of-type { font-size: 1.05rem; padding: 1rem 1.25rem; }
+      .article-body h2 { font-size: 1.4rem; }
+      .project { padding: 1.25rem; }
+      .project-header { flex-direction: column; gap: 0.25rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">AI</span>
+        <span class="logo-text">资讯<span class="accent">站</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html#news">资讯</a>
+        <a href="../index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="article-hero">
+        <span class="article-cat">科技</span>
+        <h1 class="article-title">GitHub 周热门项目 | 2026-07-14~2026-07-21</h1>
+        <div class="article-meta">
+          <span>2026-07-21</span>
+          <span>5 分钟阅读</span>
+          <span>来源：GitHub Trending</span>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p>本周 GitHub Trending 呈现鲜明的 AI Agent 生态化特征：从代码审查、命令防护到 Office 文档、交易决策，Agent 正向开发者工作流每个环节渗透，同时 Agent 安全成为新独立赛道。</p>
+
+        <h2>本周热门项目</h2>
+
+        <span class="section-label">AI Agent 设计与工具</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/Nutlope/hallmark" target="_blank" rel="noopener">Nutlope/hallmark</a></h3>
+            <span class="project-stars">★ 8.8k</span>
+          </div>
+          <p class="project-lang">TypeScript</p>
+          <p class="project-desc">反 AI 味设计技能，内置 20 套主题与 57 道 slop-test 门控，让 Claude Code、Cursor、Codex 生成的 UI 不再千篇一律。核心优势：将设计规范转化为可执行的门控规则，从源头约束 AI 生成质量。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/OpenCut" target="_blank" rel="noopener">OpenCut</a></h3>
+          </div>
+          <p class="project-lang">Rust / TypeScript</p>
+          <p class="project-desc">开源的 CapCut 替代方案，正以 Rust 核心重写，引入插件架构、MCP 服务器和无头批渲染。核心优势：完全开源、本地优先，通过插件生态实现可扩展的视频编辑能力。</p>
+        </div>
+
+        <span class="section-label">Agent 生态与平台</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" rel="noopener">Shubhamsaboo/awesome-llm-apps</a></h3>
+          </div>
+          <p class="project-lang">Python</p>
+          <p class="project-desc">收录 100+ 可直接运行的 AI Agent 与 RAG 应用，覆盖语音、研究、金融、医疗多场景，支持一键安装为编码 Agent 的新技能。核心优势：降低 Agent 应用门槛，提供即用型模板库。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/HKUDS/DeepTutor" target="_blank" rel="noopener">HKUDS/DeepTutor</a></h3>
+          </div>
+          <p class="project-lang">Python</p>
+          <p class="project-desc">把辅导、解题、测验、研究、可视化整合在同一个 Agent 循环上，支持多引擎知识库和可检视的三层记忆。核心优势：教育场景的端到端 Agent 方案，记忆机制透明可审计。</p>
+        </div>
+
+        <blockquote>AI Agent 正从「单点工具」走向「生态平台」——Agent 能力像 npm 包一样被模块化、可发现、可组合。</blockquote>
+
+        <span class="section-label">Agent 安全</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/Dicklesworthstone/destructive_command_guard" target="_blank" rel="noopener">Dicklesworthstone/destructive_command_guard</a></h3>
+            <span class="project-stars">★ 5.2k（本周 +1.4k）</span>
+          </div>
+          <p class="project-lang">Rust</p>
+          <p class="project-desc">用 Rust 实现亚毫秒级危险命令拦截，支持 10+ Agent 和 50+ 安全包。核心优势：Rust 带来的极致性能，让安全检查几乎零开销，不拖慢 Agent 执行。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener">tirth8205/code-review-graph</a></h3>
+          </div>
+          <p class="project-lang">Rust / TypeScript</p>
+          <p class="project-desc">用 Tree-sitter 构建代码图谱，在 6 个真实仓库基准测试中 Token 消耗中位数降低约 82 倍，让 AI 只读真正必要的文件。核心优势：将代码库结构化为图谱，大幅降低 Agent 的上下文成本。</p>
+        </div>
+
+        <span class="section-label">垂直领域 Agent</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/iOfficeAI/OfficeCLI" target="_blank" rel="noopener">iOfficeAI/OfficeCLI</a></h3>
+          </div>
+          <p class="project-lang">Go</p>
+          <p class="project-desc">首个专为 AI Agent 设计的 Office 套件，单二进制即可读写编辑 Word/Excel/PowerPoint，内置 HTML 渲染引擎让 AI「看见」自己的输出并闭环修正。核心优势：把 Office 文档操作变为 Agent 可调用的原子能力。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener">tt-a1i/archify</a></h3>
+            <span class="project-stars">★ 6.25k（本周 +2.1k）</span>
+          </div>
+          <p class="project-lang">TypeScript</p>
+          <p class="project-desc">用自然语言生成架构、时序、数据流图，支持暗亮主题与多格式导出。核心优势：将图表生成从手动拖拽变为自然语言驱动，大幅提升技术文档编写效率。</p>
+        </div>
+
+        <span class="section-label">终端编码 Agent</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/openai/codex" target="_blank" rel="noopener">openai/codex</a></h3>
+          </div>
+          <p class="project-lang">Rust</p>
+          <p class="project-desc">以 Rust 重写，本周合并 30+ PR 持续迭代。核心优势：OpenAI 官方出品，Rust 重写后性能与可靠性显著提升，生态整合能力强。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/earendil-works/pi" target="_blank" rel="noopener">earendil-works/pi</a></h3>
+            <span class="project-stars">★ 55.6k</span>
+          </div>
+          <p class="project-lang">Rust / TypeScript</p>
+          <p class="project-desc">将多供应商 LLM API、Agent 运行时与编码 CLI 拆分为可组合的包，并采用严格的供应链加固。核心优势：模块化设计让开发者按需组合，供应链安全措施保障生产可靠性。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/HKUDS/Vibe-Trading" target="_blank" rel="noopener">HKUDS/Vibe-Trading</a></h3>
+          </div>
+          <p class="project-lang">Python</p>
+          <p class="project-desc">把量化研究的完整链路封装为 Agent 技能，集成 460+ 学术因子与 16 适配器 IM 通道。核心优势：将量化研究的专业门槛降为自然语言交互，学术因子库降低策略开发门槛。</p>
+        </div>
+
+        <h2>关键趋势洞察</h2>
+        <ul>
+          <li><strong>Agent 生态化</strong>：从单点工具走向生态平台，Agent 能力像 npm 包一样被模块化、可发现、可组合。</li>
+          <li><strong>Agent 安全成为独立赛道</strong>：危险命令拦截、代码图谱缩减上下文等安全工具本周集中爆发，说明行业已意识到 Agent 自主性的风险面。</li>
+          <li><strong>垂直领域 Agent 深入行业流程</strong>：Office 文档操作、架构图生成、量化交易等垂直场景出现专用 Agent，说明 Agent 正从通用走向专业。</li>
+          <li><strong>终端编码 Agent 竞争白热化</strong>：OpenAI Codex、pi、Vibe-Trading 等项目同期活跃，Rust 重写成为性能标配。</li>
+          <li><strong>Rust 成为 Agent 基础设施首选</strong>：本周多个核心项目（codex、destructive_command_guard、pi、OpenCut）选用 Rust，性能与安全双驱动。</li>
+        </ul>
+
+        <h2>数据来源</h2>
+        <ul>
+          <li><a href="https://github.com/trending?since=weekly" target="_blank" rel="noopener">GitHub Trending — Weekly</a></li>
+        </ul>
+
+        <div class="ai-note">
+          <span>ℹ️</span>
+          <span>本文由 AI 生成与整理，内容仅供参考。项目信息和 Star 数基于采集时的数据，可能已有变化。如需引用请核实原始来源。</span>
+        </div>
+
+        <a href="../index.html" class="back-to-home">← 返回首页</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 AI 资讯站 · 由 AI 生成内容</span>
+        <span>Built with HTML + CSS + JS</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

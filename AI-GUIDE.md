@@ -2,7 +2,7 @@
 
 > 本文档供 AI 助手阅读。读完本文档,你应该能独立完成:生成文章、更新网站、修改配置、推送部署。
 >
-> **最后更新**:2026-07-21
+> **最后更新**:2026-07-22
 > **网站地址**:https://xiaoxuwenzi.github.io
 
 ---
@@ -49,6 +49,8 @@ xiaoxuwenzi.github.io/
 │   │   ├── 生活/
 │   │   └── 观点/
 │   └── assets/                         # 文章配图
+├── posts/                              # ⭐ 独立 HTML 文章页(长文章用)
+│   └── YYYY-MM-DD-标题.html
 ├── data/
 │   └── news.json                       # 数据备份
 ├── templates/
@@ -97,7 +99,8 @@ xiaoxuwenzi.github.io/
   date: "2026-07-21",        // 字符串,格式 YYYY-MM-DD
   readTime: "4 分钟",         // 字符串,预估阅读时间
   source: "来源名称",         // 字符串,资讯来源
-  content: [                 // 数组,正文内容,按段落拆分
+  link: "posts/example.html", // 可选,字符串,独立 HTML 文章页路径。有此字段则点击卡片跳转
+  content: [                 // 数组,正文内容,按段落拆分(有 link 时可省略)
     "第一段正文。",            // 字符串 = 普通段落
     "第二段正文。",
     { quote: "引用金句" },     // 对象 { quote: "..." } = 引用块
@@ -132,6 +135,16 @@ xiaoxuwenzi.github.io/
 2. **对象** `{ quote: "..." }` → 渲染为 `<blockquote>` 引用块
 
 **不要用其他格式**,只支持这两种。
+
+### link 字段(可选)
+
+如果文章有 `link` 字段,点击卡片将**跳转到独立 HTML 页面**,而非打开弹窗。此时 `content` 字段可省略。
+
+- 独立 HTML 文件存放在 `posts/` 目录
+- 命名规范:`YYYY-MM-DD-标题简写.html`
+- 路径格式:`link: "posts/2026-07-21-github周热门.html"`
+- 适用场景:内容较长的报告、需要丰富排版(标题层级、列表、链接、表格)的文章
+- HTML 页面需自包含(内联 CSS),并包含返回首页的链接(`../index.html`)
 
 ---
 
@@ -271,6 +284,92 @@ status: "published"
 
 ---
 
+## 六.五、独立 HTML 文章页(posts/)
+
+对于内容较长、需要丰富排式的文章(如周报、深度分析),可创建独立 HTML 页面。
+
+### 目录与命名
+
+- 存放目录:`posts/`
+- 命名规范:`YYYY-MM-DD-标题简写.html`
+- 示例:`posts/2026-07-21-github周热门.html`
+
+### 页面结构
+
+独立 HTML 文章页是完整的 HTML5 文档,包含:
+
+1. **`<head>`**:meta 标签、标题、内联 `<style>`(无需外部 CSS 文件)
+2. **`<header>`**:站点 logo,链接回 `../index.html`
+3. **文章区**:分类标签、标题(`<h1>`)、元信息(日期/阅读时间/来源)、正文
+4. **`<footer>`**:版权信息
+
+### CSS 变量
+
+复用 `index.html` 的 CSS 变量(复制 `:root { ... }` 块),保持视觉一致性:
+
+```css
+:root {
+  --bg: #fafaf9;
+  --bg2: #f5f5f4;
+  --bg3: #ffffff;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --rule: #e7e5e4;
+  --accent: #0f766e;
+  --accent-soft: #ccfbf1;
+  --accent2: #f59e0b;
+  --accent2-soft: #fef3c7;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', 'Songti SC', serif;
+  --font-mono: 'SF Mono', Consolas, 'Courier New', monospace;
+  --max: 760px;
+  --radius: 12px;
+}
+```
+
+### 正文支持的元素
+
+| 元素 | 用途 | 示例 |
+|------|------|------|
+| `<h2>` | 二级标题(章节) | `<h2>本周热门项目</h2>` |
+| `<h3>` | 三级标题(项目名) | `<h3>项目名</h3>` |
+| `<p>` | 段落 | `<p>正文内容</p>` |
+| `<ul><li>` | 无序列表 | 趋势洞察、数据来源 |
+| `<blockquote>` | 引用块 | 关键金句 |
+| `<a>` | 链接 | GitHub 仓库链接 |
+| `<strong>` | 加粗 | 关键词强调 |
+| `<code>` | 行内代码 | 技术术语 |
+| `<div class="project">` | 项目卡片 | 项目信息展示 |
+
+### 创建流程
+
+1. 生成报告内容(Markdown 或结构化数据)
+2. 基于本文档的 CSS 变量和页面结构,创建独立 HTML 文件,保存到 `posts/YYYY-MM-DD-标题.html`
+3. 在 `index.html` 的 `newsData` 数组中添加条目,使用 `link` 字段(而非 `content`):
+   ```javascript
+   {
+     id: 10,
+     category: "科技",
+     title: "文章标题",
+     excerpt: "摘要(50-80字)",
+     date: "2026-07-28",
+     readTime: "5 分钟",
+     source: "来源",
+     link: "posts/2026-07-28-标题.html"
+   }
+   ```
+4. 推送到 GitHub
+
+### 注意事项
+
+- HTML 文件必须**自包含**(所有 CSS 内联,不依赖外部文件)
+- 返回首页链接用相对路径 `../index.html`(因为文件在 `posts/` 子目录)
+- 页面需**响应式**(包含 `@media` 断点)
+- `<title>` 格式:`文章标题 — AI 资讯站`
+- 保留 AI 生成声明(底部 `ai-note` 块)
+
+---
+
 ## 七、Git 操作
 
 ### 推送流程
@@ -355,7 +454,8 @@ git push origin
 - [ ] 新文章的 id 唯一且递增
 - [ ] 分类值是 5 个之一
 - [ ] date 格式为 YYYY-MM-DD
-- [ ] content 数组只含字符串和 `{ quote: "..." }` 对象
+- [ ] content 数组只含字符串和 `{ quote: "..." }` 对象(有 link 时可省略 content)
+- [ ] 如有 link 字段,HTML 文件已存到 `posts/` 目录
 - [ ] Markdown 文件已存到 `content/articles/YYYY/MM/`
 - [ ] 提交信息符合规范
 - [ ] 已推送到 GitHub
