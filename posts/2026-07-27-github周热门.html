@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub 周热门项目 | 2026-07-20~2026-07-27 — AI 资讯站</title>
+  <meta name="description" content="本周 GitHub Trending 热门项目报告：AI Agent 基础设施化加速、感知智能突破视觉边界、基础模型深入垂直领域。">
+  <style>
+    :root {
+      --bg: #fafaf9;
+      --bg2: #f5f5f4;
+      --bg3: #ffffff;
+      --ink: #1c1917;
+      --muted: #78716c;
+      --rule: #e7e5e4;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --accent2: #f59e0b;
+      --accent2-soft: #fef3c7;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      --font-serif: Georgia, 'Times New Roman', 'Songti SC', 'SimSun', 'Source Han Serif SC', serif;
+      --font-mono: 'SF Mono', Consolas, 'Courier New', 'Microsoft YaHei', monospace;
+      --max: 760px;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+      --shadow-lg: 0 10px 30px rgba(28, 25, 23, 0.10), 0 3px 8px rgba(28, 25, 23, 0.06);
+      --transition: 0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--ink); text-decoration: underline; }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* === Header === */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 249, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1180px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+    .logo:hover { text-decoration: none; color: var(--ink); }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent) 0%, #14b8a6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .logo-text { font-weight: 400; }
+    .logo-text .accent { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+
+    /* === Article Hero === */
+    .article-hero {
+      padding: 3.5rem 0 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .article-cat {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding: 0.3rem 0.8rem;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      color: var(--ink);
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .article-meta span::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent2);
+    }
+
+    /* === Article Body === */
+    .article-body {
+      padding: 2.5rem 0 1rem;
+    }
+    .article-body > p:first-of-type {
+      font-size: 1.15rem;
+      color: var(--ink);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg2);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+    }
+    .article-body h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--rule);
+    }
+    .article-body h2:first-of-type {
+      margin-top: 0;
+    }
+    .article-body h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .article-body p {
+      font-size: 1rem;
+      color: var(--ink);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--ink);
+      background: var(--accent-soft);
+      border-radius: 0 8px 8px 0;
+    }
+    .article-body ul {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    .article-body ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+    .article-body ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .article-body strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .article-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--bg2);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    /* === Project Card === */
+    .project {
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      transition: all var(--transition);
+    }
+    .project:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .project-name {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0;
+    }
+    .project-name a {
+      color: var(--ink);
+    }
+    .project-name a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .project-stars {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent2);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .project-lang {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* === Section label === */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* === Back button === */
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 3rem 0 2rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--bg3);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: all var(--transition);
+    }
+    .back-to-home:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* === AI note === */
+    .ai-note {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--accent2-soft);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #92400e;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    /* === Footer === */
+    .site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem 0 2rem;
+      background: var(--bg2);
+      margin-top: 2rem;
+    }
+    .site-header .container,
+    .site-footer .container {
+      max-width: 1180px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a:not(.back-to-home) { display: none; }
+      .article-hero { padding: 2.5rem 0 1.5rem; }
+      .article-body { padding: 2rem 0 1rem; }
+      .article-body > p:first-of-type { font-size: 1.05rem; padding: 1rem 1.25rem; }
+      .article-body h2 { font-size: 1.4rem; }
+      .project { padding: 1.25rem; }
+      .project-header { flex-direction: column; gap: 0.25rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">AI</span>
+        <span class="logo-text">资讯<span class="accent">站</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html#news">资讯</a>
+        <a href="../index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="article-hero">
+        <span class="article-cat">科技</span>
+        <h1 class="article-title">GitHub 周热门项目 | 2026-07-20~2026-07-27</h1>
+        <div class="article-meta">
+          <span>2026-07-27</span>
+          <span>6 分钟阅读</span>
+          <span>来源：GitHub Trending</span>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p>本周 GitHub Trending 呈现「AI Agent 基础设施化」与「感知智能突破」两大主线：从统一 AI 网关、Agent CLI 入口到 Agent 系统化教材，开发者工具链正在围绕 Agent 重新组装；与此同时，WiFi 感知、全球情报仪表盘等项目展示了 AI 感知能力向物理世界和地缘信息延伸的新方向。金融市场基础模型和教育个性化辅导的上榜，则标志着基础模型在垂直领域的深入落地。</p>
+
+        <h2>本周热门项目</h2>
+
+        <span class="section-label">感知智能与全球情报</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/ruvnet/RuView" target="_blank" rel="noopener">ruvnet/RuView</a></h3>
+            <span class="project-stars">★ 85,981</span>
+          </div>
+          <p class="project-lang">Rust · MIT</p>
+          <p class="project-desc">将普通 WiFi 信号转化为实时空间智能、生命体征监测和存在检测，全程无需任何摄像头。核心优势：利用 commodity WiFi 信号实现非视觉感知，兼顾隐私保护与空间智能，适用于智能家居、健康监测等场景，Rust 核心保证高性能与低延迟。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener">koala73/worldmonitor</a></h3>
+            <span class="project-stars">★ 74,151</span>
+          </div>
+          <p class="project-lang">TypeScript · Other</p>
+          <p class="project-desc">实时全球情报仪表盘，整合 AI 驱动的新闻聚合、地缘政治监测和基础设施追踪，提供统一的态势感知界面。核心优势：开源版 Palantir，将多源信息流聚合为可视化态势感知面板，支持 MCP Server 集成，适用于研究者和分析师。</p>
+        </div>
+
+        <blockquote>WiFi 信号替代摄像头、开源对标 Palantir——AI 感知正在突破视觉边界，从数字世界向物理世界和地缘信息延伸。</blockquote>
+
+        <span class="section-label">AI Agent 生态与基础设施</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/diegosouzapw/OmniRoute" target="_blank" rel="noopener">diegosouzapw/OmniRoute</a></h3>
+            <span class="project-stars">★ 30,881</span>
+          </div>
+          <p class="project-lang">TypeScript · MIT</p>
+          <p class="project-desc">免费 MIT 协议的 AI 网关，一个端点接入 290+ 供应商（90+ 免费）、500+ 模型，支持 Claude Code、Codex、Cursor 等主流编码 Agent。核心优势：配额感知的自动故障转移、RTK+Caveman 压缩节省 15-95% Token，500+ 贡献者共建生态。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/MoonshotAI/kimi-code" target="_blank" rel="noopener">MoonshotAI/kimi-code</a></h3>
+            <span class="project-stars">★ 5,215</span>
+          </div>
+          <p class="project-lang">TypeScript · MIT</p>
+          <p class="project-desc">Kimi Code CLI — 下一代 Agent 的起点，月之暗面官方推出的编码 Agent 命令行工具。核心优势：背靠 Kimi 大模型能力，为开发者提供从 CLI 启动 Agent 工作流的统一入口，是国产 AI Agent 生态的重要一环。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/bojieli/ai-agent-book" target="_blank" rel="noopener">bojieli/ai-agent-book</a></h3>
+            <span class="project-stars">★ 20,082</span>
+          </div>
+          <p class="project-lang">Python · Apache-2.0</p>
+          <p class="project-desc">《深入理解 AI Agent：设计原理与工程实践》（李博杰 著）开源主仓库，包含全书正文、编译版 PDF 与按章配套代码。核心优势：从设计原理到工程实践的系统化 AI Agent 教材，覆盖 Agent 记忆、上下文工程、多模态、RAG、强化学习等核心主题。</p>
+        </div>
+
+        <span class="section-label">垂直领域基础模型</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/shiyu-coder/Kronos" target="_blank" rel="noopener">shiyu-coder/Kronos</a></h3>
+            <span class="project-stars">★ 32,265</span>
+          </div>
+          <p class="project-lang">Python · MIT</p>
+          <p class="project-desc">金融市场的基础模型，将市场数据视为一种「语言」进行建模与预测。核心优势：以大语言模型范式处理金融时间序列，无需大量领域特征工程即可捕捉市场模式，为量化交易和金融分析提供新范式。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/HKUDS/DeepTutor" target="_blank" rel="noopener">HKUDS/DeepTutor</a></h3>
+            <span class="project-stars">★ 27,306</span>
+          </div>
+          <p class="project-lang">Python · Apache-2.0</p>
+          <p class="project-desc">终身个性化辅导系统，整合辅导、解题、测验、研究和可视化于同一 Agent 循环，支持多引擎知识库和可检视的三层记忆。核心优势：香港大学数据科学实验室出品，教育场景端到端 Agent 方案，记忆机制透明可审计。</p>
+        </div>
+
+        <blockquote>基础模型不再停留在通用对话层——Kronos 将金融市场视为「语言」，DeepTutor 将教育构建为 Agent 循环，垂直渗透正在加速。</blockquote>
+
+        <span class="section-label">开发者工具与基础设施</span>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/schollz/croc" target="_blank" rel="noopener">schollz/croc</a></h3>
+            <span class="project-stars">★ 30,384</span>
+          </div>
+          <p class="project-lang">Go · MIT</p>
+          <p class="project-desc">简单安全地在两台电脑之间传输文件，基于 PAKE 协议实现端到端加密。核心优势：一条命令即可完成跨平台文件传输，自动中继选择、断点续传、端到端加密，是开发者日常文件共享的瑞士军刀。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/Pumpkin-MC/Pumpkin" target="_blank" rel="noopener">Pumpkin-MC/Pumpkin</a></h3>
+            <span class="project-stars">★ 8,847</span>
+          </div>
+          <p class="project-lang">Rust · GPL-3.0</p>
+          <p class="project-desc">高性能 Minecraft 服务器实现，用 Rust 从头重写，致力于让每个人都能托管快速高效的游戏服务器。核心优势：Rust 带来的内存安全与高性能，完整支持 Minecraft Java/Bedrock 协议，Docker 友好部署。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/CoreBunch/Instatic" target="_blank" rel="noopener">CoreBunch/Instatic</a></h3>
+            <span class="project-stars">★ 4,311</span>
+          </div>
+          <p class="project-lang">TypeScript · MIT</p>
+          <p class="project-desc">Webflow、Framer 和 WordPress 的开源替代方案，支持 Agent 驱动的自托管可视化 CMS，输出干净的静态页面。核心优势：将可视化建站与 Agent 能力结合，内置用户角色、插件系统和数据库，输出纯静态页面兼顾性能与可维护性。</p>
+        </div>
+
+        <h2>关键趋势洞察</h2>
+
+        <ul>
+          <li><strong>AI Agent 基础设施化加速</strong>：OmniRoute（统一网关）、Kimi Code CLI（Agent 入口）、ai-agent-book（系统教材）三者同框，标志着 Agent 工具链正从零散工具向基础设施层收敛，开发者需要的是「接入即用」的 Agent 基座而非单个工具。</li>
+          <li><strong>感知智能突破视觉边界</strong>：RuView 用 WiFi 信号替代摄像头实现空间感知，本周 Star 数高居榜首（85.9k），反映了市场对非视觉、隐私友好的感知技术的强烈需求，物理世界 AI 感知正在开辟新赛道。</li>
+          <li><strong>基础模型深入垂直领域</strong>：Kronos 将金融市场视为「语言」进行建模，DeepTutor 将教育辅导构建为 Agent 循环——基础模型不再停留在通用对话层，而是向金融、教育等垂直领域纵深渗透。</li>
+          <li><strong>开源挑战商业巨头</strong>：worldmonitor 对标 Palantir、Instatic 对标 Webflow/Framer/WordPress、OmniRoute 对标商业 AI 网关——本周多个项目以开源姿态直接挑战估值数十亿美元的商业产品，开源与商业的边界正在重构。</li>
+          <li><strong>Rust 在基础设施层持续崛起</strong>：RuView（感知）和 Pumpkin（游戏服务器）均选择 Rust 作为核心语言，验证了 Rust 在高性能、内存安全关键场景的不可替代性，Rust 正从系统编程向 AI 感知和游戏基础设施扩展。</li>
+        </ul>
+
+        <h2>数据来源</h2>
+
+        <ul>
+          <li><a href="https://github.com/trending?since=weekly" target="_blank" rel="noopener">GitHub Trending - Weekly</a></li>
+          <li><a href="https://docs.github.com/en/rest/repos/repos" target="_blank" rel="noopener">GitHub API - Repository Details</a></li>
+          <li>各项目 GitHub 仓库页面（Star 数截至 2026-07-27）</li>
+        </ul>
+
+        <a href="../index.html" class="back-to-home">← 返回首页</a>
+
+        <div class="ai-note">
+          <span>⚠</span>
+          <span>本报告由 AI 自动采集 GitHub Trending 周榜数据生成，所有项目信息均来自 GitHub 官方 API 和仓库页面，未经人工编造。Star 数为采集时点的实时数据，可能随时间变化。</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 AI 资讯站 · 由 AI 驱动的内容平台</span>
+        <span>Powered by GitHub Pages</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
