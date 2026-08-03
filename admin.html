@@ -430,6 +430,62 @@
       reader.readAsDataURL(file);
     }
 
+    // ===== 辅助：估算阅读时长 =====
+    function estimateReadTime(text) {
+      const clean = text.replace(/<[^>]+>/g, '');
+      const count = clean.length;
+      const mins = Math.max(1, Math.ceil(count / 400));
+      return mins + ' 分钟';
+    }
+
+    // ===== 辅助：更新主页 index.html 的 postsData 数组 =====
+    async function updateIndexPostsData(postMeta, isDelete, deleteSlug) {
+      const cfg = getConfig();
+      showToast('正在同步更新主页列表...');
+
+      // 读取 index.html
+      const indexData = await ghFetch('contents/index.html');
+      let indexContent = b64_to_utf8(indexData.content.replace(/\n/g, ''));
+
+      // 定位 postsData 数组
+      const arrayStart = indexContent.indexOf('const postsData = [');
+      const arrayEnd = indexContent.indexOf('];', arrayStart);
+      if (arrayStart === -1 || arrayEnd === -1) {
+        showToast('⚠️ 未找到主页 postsData 数组，跳过同步');
+        return;
+      }
+
+      const arrayStr = indexContent.slice(arrayStart + 'const postsData = ['.length, arrayEnd).trim();
+
+      if (isDelete) {
+        // 删除匹配 slug 的条目
+        const slugPattern = new RegExp(`\\s*\\{[^}]*slug:\\s*"${deleteSlug}"[^}]*\\},?`, 'g');
+        const newArrayStr = arrayStr.replace(slugPattern, '\n').replace(/,\s*\n\s*$/,'\n');
+        indexContent = indexContent.slice(0, arrayStart + 'const postsData = [') + '\n' + newArrayStr.trim() + '\n    ' + indexContent.slice(arrayEnd);
+      } else {
+        // 构造新条目并插入到数组最前面
+        const tagsArray = postMeta.tags.split(',').map(t => t.trim()).filter(Boolean).map(t => `"${t}"`).join(', ');
+        const newEntry = `      { id: 0, category: "${postMeta.cat}", slug: "${postMeta.slug}",
+        title: "${postMeta.title}", subtitle: "${postMeta.subtitle}",
+        excerpt: "${postMeta.excerpt}",
+        date: "${postMeta.date}", readTime: "${postMeta.readTime}", source: "${postMeta.source}", tags: [${tagsArray}] }`;
+
+        indexContent = indexContent.slice(0, arrayStart + 'const postsData = ['.length) + '\n' + newEntry + ',\n' + indexContent.slice(arrayStart + 'const postsData = ['.length);
+      }
+
+      // 提交更新后的 index.html
+      const updatePayload = {
+        message: isDelete ? `remove post from index: ${deleteSlug}` : `add post to index: ${postMeta.title}`,
+        content: utf8_to_b64(indexContent),
+        sha: indexData.sha,
+        branch: cfg.branch
+      };
+      await ghFetch('contents/index.html', {
+        method: 'PUT',
+        body: JSON.stringify(updatePayload)
+      });
+    }
+
     // ===== 提交发布文章 =====
     document.getElementById('btn-save').onclick = async () => {
       const title = document.getElementById('post-title').value.trim();
@@ -437,6 +493,7 @@
       const cat = document.getElementById('post-cat').value.trim() || '随笔';
       const tags = document.getElementById('post-tags').value.trim();
       const subtitle = document.getElementById('post-subtitle').value.trim();
+      const source = subtitle || cat;
 
       if (!title || !content) {
         showToast('请填写文章标题和正文');
@@ -449,8 +506,9 @@
       const today = new Date().toISOString().split('T')[0];
       const slug = title.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').slice(0, 30) || 'article';
       const targetPath = currentPostPath || `posts/${today}-${slug}.html`;
+      const isNewPost = !currentPostSha;
 
-      // 转换纯文本段落为语义化 HTML（按双换行或单换行分段，保留标签）
+      // 转换纯文本段落为语义化 HTML（统一字号字体，无首字下沉）
       const formattedBody = content
         .split(/\n\s*\n/)
         .map(paragraph => {
@@ -459,11 +517,11 @@
           if (trimmed.startsWith('<img') || trimmed.startsWith('<h') || trimmed.startsWith('<div')) {
             return trimmed;
           }
-          return `<p style="margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.8; color: #1a1b1f;">${trimmed.replace(/\n/g, '<br>')}</p>`;
+          return `<p>${trimmed.replace(/\n/g, '<br>')}</p>`;
         })
         .join('\n');
 
-      // 简单组装 HTML
+      // 统一排版模板（无首字下沉，统一无衬线字体）
       const fullHtml = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -471,28 +529,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title} — AI 资讯</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 2.5rem auto; padding: 0 1.25rem; line-height: 1.8; color: #1a1b1f; background: #f9f9f2; }
-    h1 { font-family: Georgia, serif; font-size: 2.2rem; margin-bottom: 0.5rem; color: #1a1b1f; }
-    .meta { font-family: monospace; color: #6b6b66; font-size: 0.88rem; margin-bottom: 2rem; border-bottom: 1px solid #e3e3d8; padding-bottom: 0.75rem; }
-    .subtitle { font-style: italic; color: #6b6b66; font-size: 1.1rem; margin-bottom: 1.5rem; }
-    a { color: #ed3a38; text-decoration: none; font-family: monospace; }
-    a:hover { text-decoration: underline; }
-    img { max-width: 100%; border-radius: 4px; margin: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    :root { --bg: #f9f9f2; --ink: #1a1b1f; --muted: #6b6b66; --rule: #e3e3d8; --accent: #ed3a38; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 760px; margin: 0 auto; padding: 0 1.5rem; line-height: 1.8; color: var(--ink); background: var(--bg); }
+    .article-head { padding: 3rem 0 2rem; border-bottom: 1px solid var(--rule); }
+    .back-link { font-family: monospace; font-size: 0.9rem; color: var(--muted); }
+    .back-link:hover { color: var(--accent); }
+    .article-cat { font-family: monospace; font-size: 0.82rem; color: var(--accent); display: block; margin: 1.5rem 0 1rem; }
+    h1 { font-family: Georgia, serif; font-size: 2rem; font-weight: 400; line-height: 1.2; margin-bottom: 0.75rem; }
+    .subtitle { font-style: italic; color: var(--muted); font-size: 1.1rem; margin-bottom: 1rem; }
+    .meta { font-family: monospace; color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .article-body { padding: 2rem 0 3rem; font-size: 1.05rem; line-height: 1.8; color: var(--ink); }
+    .article-body p { margin-bottom: 1.4rem; }
+    img { max-width: 100%; border-radius: 4px; margin: 1rem 0; }
   </style>
 </head>
 <body>
-  <a href="../index.html">← 返回首页</a>
-  <h1 style="margin-top:1.5rem;">${title}</h1>
-  <div class="meta">分类: ${cat} | 发布时间: ${today} ${tags ? '| 标签: ' + tags : ''}</div>
-  ${subtitle ? `<p class="subtitle">${subtitle}</p>` : ''}
-  <main style="margin-top:1.5rem;">${formattedBody}</main>
+  <div class="article-head">
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    <span class="article-cat">${cat}</span>
+    <h1>${title}</h1>
+    ${subtitle ? `<p class="subtitle">${subtitle}</p>` : ''}
+    <div class="meta">发布时间: ${today} | 阅读约 ${estimateReadTime(content)} ${tags ? '| 标签: ' + tags : ''}</div>
+  </div>
+  <main class="article-body">${formattedBody}</main>
 </body>
 </html>`;
 
       try {
         const cfg = getConfig();
         const payload = {
-          message: currentPostSha ? `update post: ${title}` : `add post: ${title}`,
+          message: isNewPost ? `add post: ${title}` : `update post: ${title}`,
           content: utf8_to_b64(fullHtml),
           branch: cfg.branch
         };
@@ -503,7 +569,23 @@
           body: JSON.stringify(payload)
         });
 
-        showToast('🚀 发布成功！GitHub Pages 预计 1 分钟内更新。');
+        // 若为新文章，同步更新主页 index.html 的 postsData 数组
+        if (isNewPost) {
+          const postMeta = {
+            title: title.replace(/"/g, '\\"'),
+            subtitle: (subtitle || source).replace(/"/g, '\\"'),
+            excerpt: content.replace(/<[^>]+>/g, '').replace(/"/g, '\\"').slice(0, 80) + '...',
+            cat: cat.replace(/"/g, '\\"'),
+            date: today,
+            readTime: estimateReadTime(content),
+            source: source.replace(/"/g, '\\"'),
+            tags: tags,
+            slug: slug
+          };
+          await updateIndexPostsData(postMeta, false);
+        }
+
+        showToast('🚀 发布成功！主页列表已同步，GitHub Pages 预计 1 分钟内更新。');
         loadPostList();
       } catch (err) {
         showToast(`发布失败: ${err.message}`);
@@ -527,7 +609,14 @@
           })
         });
 
-        showToast('已成功删除文章');
+        // 同步从主页 postsData 中删除
+        const slugMatch = currentPostPath.match(/posts\/[\d-]+-(.+)\.html$/);
+        const deleteSlug = slugMatch ? slugMatch[1] : '';
+        if (deleteSlug) {
+          await updateIndexPostsData(null, true, deleteSlug);
+        }
+
+        showToast('已成功删除文章，主页列表已同步更新');
         document.getElementById('btn-new').click();
         loadPostList();
       } catch (err) {
