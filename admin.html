@@ -438,6 +438,17 @@
       return mins + ' 分钟';
     }
 
+    // ===== 辅助：清理文本，确保安全插入 JS 字符串字面量（去除所有换行/控制字符，转义引号和反斜杠） =====
+    function sanitizeJsStr(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/[\r\n\t\f\v\x00-\x1f]/g, ' ')  // 所有控制字符（含 \r \n \t）替换为空格
+        .replace(/\\/g, '\\\\')                    // 转义反斜杠
+        .replace(/"/g, '\\"')                      // 转义双引号
+        .replace(/\s+/g, ' ')                      // 多个空格合并为一个
+        .trim();
+    }
+
     // ===== 辅助：更新主页 index.html 的 postsData 数组 =====
     async function updateIndexPostsData(postMeta, isDelete, deleteSlug) {
       const cfg = getConfig();
@@ -589,15 +600,15 @@
         // 若为全新文章（没有目标SHA的），同步更新主页 index.html 的 postsData 数组
         if (!targetSha) {
           const postMeta = {
-            title: title.replace(/"/g, '\\"').replace(/\n/g, ' '),
-            subtitle: (subtitle || source).replace(/"/g, '\\"').replace(/\n/g, ' '),
-            excerpt: content.replace(/<[^>]+>/g, '').replace(/"/g, '\\"').replace(/\n/g, ' ').slice(0, 80) + '...',
-            cat: cat.replace(/"/g, '\\"'),
+            title: sanitizeJsStr(title),
+            subtitle: sanitizeJsStr(subtitle || source),
+            excerpt: sanitizeJsStr(content.replace(/<[^>]+>/g, '').slice(0, 80)) + '...',
+            cat: sanitizeJsStr(cat),
             date: today,
             readTime: estimateReadTime(content),
-            source: source.replace(/"/g, '\\"'),
+            source: sanitizeJsStr(source),
             tags: tags,
-            slug: slug
+            slug: sanitizeJsStr(slug)
           };
           await updateIndexPostsData(postMeta, false);
         }
