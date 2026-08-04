@@ -506,7 +506,7 @@
       const today = new Date().toISOString().split('T')[0];
       const slug = title.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').slice(0, 30) || 'article';
       const targetPath = currentPostPath || `posts/${today}-${slug}.html`;
-      const isNewPost = !currentPostSha;
+      const isNewPost = !currentPostSha || currentPostSha === null;
 
       // 转换纯文本段落为语义化 HTML（统一字号字体，无首字下沉）
       const formattedBody = content
@@ -557,20 +557,37 @@
 
       try {
         const cfg = getConfig();
+        
+        // 发送更新/新建前，先做一次存在性检查获取目标文件最新的 SHA（覆盖本地可能为空的错判，避免 Invalid request "sha" wasnt supplied）
+        let targetSha = currentPostSha;
+        if (!isNewPost || !targetSha) {
+          try {
+            const checkExist = await ghFetch(`contents/${targetPath}`);
+            if (checkExist && checkExist.sha) {
+               targetSha = checkExist.sha;
+            }
+          } catch(e) {
+            // 404 表明文件确实不存，那就是新文件
+          }
+        }
+
         const payload = {
-          message: isNewPost ? `add post: ${title}` : `update post: ${title}`,
+          message: targetSha ? `update post: ${title}` : `add post: ${title}`,
           content: utf8_to_b64(fullHtml),
           branch: cfg.branch
         };
-        if (currentPostSha) payload.sha = currentPostSha;
+        
+        if (targetSha) {
+          payload.sha = targetSha;
+        }
 
         await ghFetch(`contents/${targetPath}`, {
           method: 'PUT',
           body: JSON.stringify(payload)
         });
 
-        // 若为新文章，同步更新主页 index.html 的 postsData 数组
-        if (isNewPost) {
+        // 若为全新文章（没有目标SHA的），同步更新主页 index.html 的 postsData 数组
+        if (!targetSha) {
           const postMeta = {
             title: title.replace(/"/g, '\\"').replace(/\n/g, ' '),
             subtitle: (subtitle || source).replace(/"/g, '\\"').replace(/\n/g, ' '),
