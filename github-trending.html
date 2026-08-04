@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub 近期热门项目</title>
+<style>
+:root{
+--primary:#F3A04C;--accent:#E58522;--background:#F4F4F6;--panel-bg:#FEFDFC;--card-bg:#fff;
+--tooltip-bg:#454545;--success:#40B43E;--warning:#EBA400;--destructive:#E65C53;
+--destructive-hover:#D14B42;--primary-foreground:#fff;--text-primary:rgba(0,0,0,.8);
+--text-secondary:rgba(0,0,0,.5);--text-tertiary:rgba(0,0,0,.35);--intensity-0:rgba(0,0,0,0);
+--intensity-3:rgba(0,0,0,.03);--intensity-4:rgba(0,0,0,.04);--intensity-6:rgba(0,0,0,.06);
+--intensity-8:rgba(0,0,0,.08);--intensity-12:rgba(0,0,0,.12);--intensity-16:rgba(0,0,0,.16);
+--intensity-20:rgba(0,0,0,.2);--intensity-35:rgba(0,0,0,.35);--intensity-60:rgba(0,0,0,.6);
+--input-shadow:rgba(0,0,0,.08);--radius-sm:8px;--radius-md:10px;--radius-lg:14px;--radius-xl:18px;
+font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+@media (prefers-color-scheme:dark){
+:root{
+--background:#232324;--panel-bg:#332D28;--card-bg:#2E2E2E;--tooltip-bg:#BABABA;
+--primary-foreground:#000;--text-primary:rgba(255,255,255,.8);--text-secondary:rgba(255,255,255,.5);
+--text-tertiary:rgba(255,255,255,.35);--intensity-0:rgba(255,255,255,0);
+--intensity-3:rgba(255,255,255,.03);--intensity-4:rgba(255,255,255,.04);
+--intensity-6:rgba(255,255,255,.06);--intensity-8:rgba(255,255,255,.08);
+--intensity-12:rgba(255,255,255,.12);--intensity-16:rgba(255,255,255,.16);
+--intensity-20:rgba(255,255,255,.2);--intensity-35:rgba(255,255,255,.35);
+--intensity-60:rgba(255,255,255,.6);--input-shadow:rgba(0,0,0,.28)
+}
+}
+*{box-sizing:border-box}
+body{margin:0;padding:24px 16px;background:var(--background);min-height:100vh}
+button,a{cursor:pointer}
+.w-root{display:block;width:100%;max-width:960px;margin:0 auto;color:var(--text-primary)}
+.w-header{margin-bottom:16px}
+.w-title{font-size:18px;font-weight:600;color:var(--text-primary);margin:0 0 4px 0}
+.w-subtitle{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.w-filterbar{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.w-filterbar::-webkit-scrollbar{display:none}
+.w-filter{flex-shrink:0;height:30px;padding:0 12px;border:.5px solid var(--intensity-8);border-radius:999px;background:var(--intensity-4);color:var(--text-secondary);font-size:12px;font-weight:500;transition:all .15s;white-space:nowrap}
+.w-filter:hover{background:var(--intensity-6)}
+.w-filter.active{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+.w-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.w-card{display:block;text-decoration:none;color:inherit;background:var(--card-bg);border:.5px solid var(--intensity-8);border-radius:14px;padding:14px;transition:border-color .15s,transform .1s}
+.w-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.w-card:active{transform:translateY(0)}
+.w-cardtop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+.w-cardname{font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.3}
+.w-cardowner{font-size:11px;color:var(--text-tertiary);margin-top:2px}
+.w-lang{display:inline-flex;align-items:center;gap:4px;flex-shrink:0}
+.w-langdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.w-langtext{font-size:10px;color:var(--text-secondary);font-weight:500;white-space:nowrap}
+.w-stats{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.w-star{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:500;color:var(--text-primary)}
+.w-trend{display:inline-flex;align-items:center;gap:2px;font-size:11px;font-weight:500;color:var(--success)}
+.w-desc{font-size:12px;color:var(--text-secondary);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.w-footer{margin-top:16px;padding-top:12px;border-top:.5px solid var(--intensity-8);font-size:11px;color:var(--text-tertiary);line-height:1.5}
+.w-catlabel{font-size:12px;font-weight:600;color:var(--text-primary);margin:18px 0 8px 0;padding-bottom:6px;border-bottom:.5px solid var(--intensity-6);display:flex;align-items:center;gap:6px}
+.w-catcount{font-size:11px;font-weight:400;color:var(--text-tertiary)}
+</style>
+</head>
+<body>
+<div class="w-root">
+  <div class="w-header">
+    <div class="w-title">GitHub 近期热门项目</div>
+    <div class="w-subtitle">2026年7月 Trending 周榜精选 · 按分类整理，点击卡片直达仓库</div>
+  </div>
+  <div class="w-filterbar" id="filterBar"></div>
+  <div id="contentArea"></div>
+  <div class="w-footer">数据来源：GitHub Trending（2026-07-18 周榜）及社区整理。Star 数为抓取时数据，可能已有变化。点击任意卡片可在新页面打开对应 GitHub 仓库。</div>
+</div>
+
+<script>
+var categories=[
+  {id:"all",label:"全部"},
+  {id:"agent",label:"AI Agent 框架"},
+  {id:"coding",label:"AI 编程工具"},
+  {id:"infra",label:"AI 基础设施"},
+  {id:"runtime",label:"开发运行时"},
+  {id:"app",label:"应用与创作"},
+  {id:"design",label:"设计与知识"}
+];
+var langColors={
+  "TypeScript":"#3178C6",
+  "Python":"#3776AB",
+  "Rust":"#DEA584",
+  "C++":"#00599C",
+  "Zig":"#F7A41D",
+  "Frontend":"#E34F26"
+};
+var projects=[
+  {name:"openclaw",owner:"openclaw",stars:"212K+",trend:"+212K/月",lang:"TypeScript",cat:"agent",desc:"全栈本地AI助手框架，跨平台、本地优先的个人AI操作系统，2026年开年月榜无可争议的王者"},
+  {name:"hermes-agent",owner:"NousResearch",stars:"181.9K",trend:"+5.6K",lang:"Python",cat:"agent",desc:"自学习AI代理系统，具备跨会话长期记忆、技能自创建与多平台网关统一接入能力"},
+  {name:"orca",owner:"stablyai",stars:"21.2K",trend:"+5.4K",lang:"TypeScript",cat:"agent",desc:"并行智能体开发环境（ADE），支持用个人订阅调度任意编程代理集群，打通桌面与移动端"},
+  {name:"shannon",owner:"KeygraphHQ",stars:"20K+",trend:"+20K/月",lang:"TypeScript",cat:"agent",desc:"全自主AI黑客工具，96.15% XBOW基准成功率，AI红队与漏洞挖掘方向的标杆项目"},
+  {name:"hallmark",owner:"Nutlope",stars:"12.1K",trend:"+8.1K",lang:"TypeScript",cat:"coding",desc:"专为Claude Code和Cursor打造的Anti-AI-slop设计技能，专治AI生成的千篇一律与廉价感界面"},
+  {name:"stitch-skills",owner:"google-labs-code",stars:"7.6K",trend:"+1.1K",lang:"TypeScript",cat:"coding",desc:"谷歌出品的Agent技能库，遵循开放标准，兼容Cursor、Claude Code、Gemini CLI等主流编程代理"},
+  {name:"claude-code-templates",owner:"davila7",stars:"29.7K",trend:"+1.1K",lang:"Python",cat:"coding",desc:"Claude Code配置与实时监控命令行工具，让AI编程环境管理更简单直观"},
+  {name:"codex-plugin-cc",owner:"openai",stars:"29.1K",trend:"+1.8K",lang:"TypeScript",cat:"coding",desc:"OpenAI推出的Codex插件，实现在Claude Code中直接调用Codex进行代码审查与任务委派"},
+  {name:"DesktopCommanderMCP",owner:"wonderwhy-er",stars:"8.5K",trend:"+1.7K",lang:"TypeScript",cat:"coding",desc:"Claude MCP服务器，赋予终端控制、文件搜索与差异编辑三大能力，深度接管本地操作"},
+  {name:"OmniRoute",owner:"diegosouzapw",stars:"18.4K",trend:"+3.6K",lang:"TypeScript",cat:"infra",desc:"免费AI网关，单一接口打通231+供应商，独家压缩技术最高节省95% Token，智能自动回退"},
+  {name:"herdr",owner:"ogulcancelik",stars:"17.7K",trend:"+2.5K",lang:"Rust",cat:"infra",desc:"基于Rust的终端代理多路复用器，在命令行中实现多个AI智能体的并发调度与协同管理"},
+  {name:"awesome-llm-apps",owner:"Shubhamsaboo",stars:"123.6K",trend:"+6.3K",lang:"Python",cat:"infra",desc:"100+可直接克隆定制与部署的AI智能体和RAG应用集合，让开发者告别从零搭建"},
+  {name:"bun",owner:"oven-sh",stars:"94.8K",trend:"+1.2K",lang:"Rust",cat:"runtime",desc:"极速JavaScript运行时、打包器、测试运行器与包管理器，基于Rust打造的全能工具箱"},
+  {name:"abseil-cpp",owner:"abseil",stars:"18.0K",trend:"+608",lang:"C++",cat:"runtime",desc:"谷歌开源的Abseil C++通用库，提供经过内部海量实战检验的高质量基础组件"},
+  {name:"native",owner:"vercel-labs",stars:"6.5K",trend:"+854",lang:"Zig",cat:"runtime",desc:"Vercel实验室推出的原生桌面应用构建工具包，基于高性能Zig语言打造"},
+  {name:"checkout",owner:"actions",stars:"8.5K",trend:"+159",lang:"TypeScript",cat:"runtime",desc:"GitHub官方出品的代码检出Action，CI/CD自动化流水线的必备第一步"},
+  {name:"OpenCut",owner:"OpenCut-app",stars:"74.9K",trend:"+12.7K",lang:"TypeScript",cat:"app",desc:"开源剪映替代品，基于TypeScript打造，提供免费且无限制的视频剪辑体验"},
+  {name:"Vibe-Trading",owner:"HKUDS",stars:"24.7K",trend:"+5.6K",lang:"Python",cat:"app",desc:"港大团队开源的AI个人交易代理，利用智能体技术精准捕捉市场动态并自动执行策略"},
+  {name:"OfficeCLI",owner:"iOfficeAI",stars:"18.9K",trend:"+4.6K",lang:"Python",cat:"app",desc:"首个专为AI智能体打造的办公套件，支持读写自动化Word/Excel/PPT，单文件部署无需安装Office"},
+  {name:"DeepTutor",owner:"HKUDS",stars:"27.4K",trend:"+1.8K",lang:"Python",cat:"app",desc:"终身个性化智能辅导系统，量身定制专属学习路径，为学生和终身学习者提供AI私教服务"},
+  {name:"impeccable",owner:"pbakaus",stars:"47.7K",trend:"+2.3K",lang:"Frontend",cat:"design",desc:"专为AI打造的设计语言，有效弥补AI在审美上的短板，让AI更懂设计"},
+  {name:"cangjie-skill",owner:"kangarooking",stars:"3.5K",trend:"+1.2K",lang:"Python",cat:"design",desc:"将书籍、长视频和播客等高价值内容蒸馏成可执行的Agent技能，让沉睡知识转化为行动力"}
+];
+var activeFilter="all";
+
+function renderFilters(){
+  var bar=document.getElementById("filterBar");
+  bar.innerHTML="";
+  categories.forEach(function(c){
+    var btn=document.createElement("button");
+    btn.className="w-filter"+(c.id===activeFilter?" active":"");
+    btn.textContent=c.label;
+    btn.setAttribute("data-cat",c.id);
+    btn.addEventListener("click",function(){
+      activeFilter=c.id;
+      renderFilters();
+      renderProjects();
+    });
+    bar.appendChild(btn);
+  });
+}
+
+function createCard(p){
+  var a=document.createElement("a");
+  a.className="w-card";
+  a.href="https://github.com/"+p.owner+"/"+p.name;
+  a.target="_blank";
+  a.rel="noopener noreferrer";
+  var lc=langColors[p.lang]||"#888";
+  a.innerHTML=
+    '<div class="w-cardtop">'+
+      '<div style="min-width:0;flex:1">'+
+        '<div class="w-cardname">'+p.name+'</div>'+
+        '<div class="w-cardowner">'+p.owner+'</div>'+
+      '</div>'+
+      '<div class="w-lang">'+
+        '<span class="w-langdot" style="background:'+lc+'"></span>'+
+        '<span class="w-langtext">'+p.lang+'</span>'+
+      '</div>'+
+    '</div>'+
+    '<div class="w-stats">'+
+      '<span class="w-star">★ '+p.stars+'</span>'+
+      '<span class="w-trend">▲ '+p.trend+'</span>'+
+    '</div>'+
+    '<div class="w-desc">'+p.desc+'</div>';
+  return a;
+}
+
+function renderProjects(){
+  var area=document.getElementById("contentArea");
+  area.innerHTML="";
+  if(activeFilter==="all"){
+    categories.slice(1).forEach(function(cat){
+      var catProjects=projects.filter(function(p){return p.cat===cat.id});
+      if(catProjects.length===0)return;
+      var label=document.createElement("div");
+      label.className="w-catlabel";
+      label.innerHTML=cat.label+' <span class="w-catcount">('+catProjects.length+')</span>';
+      area.appendChild(label);
+      var grid=document.createElement("div");
+      grid.className="w-grid";
+      catProjects.forEach(function(p){grid.appendChild(createCard(p))});
+      area.appendChild(grid);
+    });
+  }else{
+    var filtered=projects.filter(function(p){return p.cat===activeFilter});
+    var grid=document.createElement("div");
+    grid.className="w-grid";
+    filtered.forEach(function(p){grid.appendChild(createCard(p))});
+    area.appendChild(grid);
+  }
+}
+
+renderFilters();
+renderProjects();
+</script>
+</body>
+</html>
