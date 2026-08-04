@@ -572,9 +572,9 @@
         // 若为新文章，同步更新主页 index.html 的 postsData 数组
         if (isNewPost) {
           const postMeta = {
-            title: title.replace(/"/g, '\\"'),
-            subtitle: (subtitle || source).replace(/"/g, '\\"'),
-            excerpt: content.replace(/<[^>]+>/g, '').replace(/"/g, '\\"').slice(0, 80) + '...',
+            title: title.replace(/"/g, '\\"').replace(/\n/g, ' '),
+            subtitle: (subtitle || source).replace(/"/g, '\\"').replace(/\n/g, ' '),
+            excerpt: content.replace(/<[^>]+>/g, '').replace(/"/g, '\\"').replace(/\n/g, ' ').slice(0, 80) + '...',
             cat: cat.replace(/"/g, '\\"'),
             date: today,
             readTime: estimateReadTime(content),
