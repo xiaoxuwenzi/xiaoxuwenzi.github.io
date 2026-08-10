@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub 周热门项目 | 2026-08-03~2026-08-10 — AI 资讯站</title>
+  <meta name="description" content="本周 GitHub Trending 热门项目报告：AI Agent 基础设施化加速、推理门槛持续下探、Agent Skills 生态标准化。">
+  <style>
+    :root {
+      --bg: #fafaf9;
+      --bg2: #f5f5f4;
+      --bg3: #ffffff;
+      --ink: #1c1917;
+      --muted: #78716c;
+      --rule: #e7e5e4;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --accent2: #f59e0b;
+      --accent2-soft: #fef3c7;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      --font-serif: Georgia, 'Times New Roman', 'Songti SC', 'SimSun', 'Source Han Serif SC', serif;
+      --font-mono: 'SF Mono', Consolas, 'Courier New', 'Microsoft YaHei', monospace;
+      --max: 760px;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+      --shadow-lg: 0 10px 30px rgba(28, 25, 23, 0.10), 0 3px 8px rgba(28, 25, 23, 0.06);
+      --transition: 0.2s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.75; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--ink); text-decoration: underline; }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(250, 250, 249, 0.85); backdrop-filter: saturate(180%) blur(12px); -webkit-backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--rule); }
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1180px; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-serif); font-size: 1.5rem; color: var(--ink); letter-spacing: -0.01em; text-decoration: none; }
+    .logo:hover { text-decoration: none; color: var(--ink); }
+    .logo-mark { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--accent) 0%, #14b8a6 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font); font-weight: 700; font-size: 0.95rem; }
+    .logo-text { font-weight: 400; }
+    .logo-text .accent { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+    .article-hero { padding: 3.5rem 0 2rem; border-bottom: 1px solid var(--rule); }
+    .article-cat { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1rem; padding: 0.3rem 0.8rem; background: var(--accent-soft); border-radius: 999px; }
+    .article-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 1.25rem; color: var(--ink); }
+    .article-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+    .article-meta span { display: flex; align-items: center; gap: 0.35rem; }
+    .article-meta span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent2); }
+    .article-body { padding: 2.5rem 0 1rem; }
+    .article-body > p:first-of-type { font-size: 1.15rem; color: var(--ink); line-height: 1.8; margin-bottom: 2rem; padding: 1.25rem 1.5rem; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; }
+    .article-body h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--rule); }
+    .article-body h2:first-of-type { margin-top: 0; }
+    .article-body h3 { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; color: var(--ink); margin-top: 2rem; margin-bottom: 0.75rem; }
+    .article-body p { font-size: 1rem; color: var(--ink); line-height: 1.85; margin-bottom: 1.2rem; }
+    .article-body blockquote { border-left: 3px solid var(--accent); padding: 1rem 0 1rem 1.5rem; margin: 2rem 0; font-family: var(--font-serif); font-style: italic; font-size: 1.2rem; color: var(--ink); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+    .article-body ul { list-style: none; margin-bottom: 1.5rem; }
+    .article-body ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; font-size: 1rem; color: var(--ink); line-height: 1.75; }
+    .article-body ul li::before { content: ''; position: absolute; left: 0; top: 0.65rem; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .article-body strong { font-weight: 600; color: var(--ink); }
+    .article-body code { font-family: var(--font-mono); font-size: 0.88em; background: var(--bg2); padding: 0.15rem 0.4rem; border-radius: 4px; color: var(--accent); }
+    .project { padding: 1.5rem; margin-bottom: 1rem; background: var(--bg3); border: 1px solid var(--rule); border-radius: var(--radius); transition: all var(--transition); }
+    .project:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .project-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .project-name { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; margin: 0; }
+    .project-name a { color: var(--ink); }
+    .project-name a:hover { color: var(--accent); text-decoration: none; }
+    .project-stars { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent2); white-space: nowrap; font-weight: 500; }
+    .project-lang { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); margin-bottom: 0.6rem; }
+    .project-desc { font-size: 0.95rem; color: var(--ink); line-height: 1.75; margin: 0; }
+    .section-label { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-top: 2.5rem; margin-bottom: 1rem; display: block; }
+    .back-to-home { display: inline-flex; align-items: center; gap: 0.5rem; margin: 3rem 0 2rem; padding: 0.6rem 1.25rem; background: var(--bg3); border: 1px solid var(--rule); border-radius: 8px; font-family: var(--font); font-size: 0.9rem; color: var(--muted); transition: all var(--transition); }
+    .back-to-home:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .ai-note { margin-top: 2rem; padding: 1rem; background: var(--accent2-soft); border-radius: 8px; font-size: 0.82rem; color: #92400e; display: flex; align-items: flex-start; gap: 0.5rem; }
+    .site-footer { border-top: 1px solid var(--rule); padding: 2.5rem 0 2rem; background: var(--bg2); margin-top: 2rem; }
+    .site-header .container, .site-footer .container { max-width: 1180px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted); font-family: var(--font-mono); }
+    @media (max-width: 768px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a:not(.back-to-home) { display: none; }
+      .article-hero { padding: 2.5rem 0 1.5rem; }
+      .article-body { padding: 2rem 0 1rem; }
+      .article-body > p:first-of-type { font-size: 1.05rem; padding: 1rem 1.25rem; }
+      .article-body h2 { font-size: 1.4rem; }
+      .project { padding: 1.25rem; }
+      .project-header { flex-direction: column; gap: 0.25rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">AI</span>
+        <span class="logo-text">资讯<span class="accent">站</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html#news">资讯</a>
+        <a href="../index.html#about">关于</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="article-hero">
+        <span class="article-cat">科技</span>
+        <h1 class="article-title">GitHub 周热门项目 | 2026-08-03~2026-08-10</h1>
+        <div class="article-meta">
+          <span>2026-08-10</span>
+          <span>8 分钟阅读</span>
+          <span>来源：GitHub Trending</span>
+        </div>
+      </div>
+      <div class="article-body">
+        <p>本周 GitHub Trending 呈现「AI Agent 基础设施化」与「推理门槛持续下探」两大主线。从 Agent 记忆中枢、多 Agent 协调到终端编程代理，AI Agent 的工程化能力正在快速成熟；同时，大模型推理成本和硬件门槛的降低让更多开发者能够参与 AI 应用构建。Agent Skills 生态的标准化也在本周取得重要进展，Google 等大厂开始系统性输出技能包。</p>
+
+        <h2>本周热门项目</h2>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/firecrawl/pdf-inspector" target="_blank" rel="noopener">firecrawl/pdf-inspector</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Rust · MIT</p>
+          <p class="project-desc">快速 PDF 分类与文本提取 Rust 库，无需 OCR 即可智能检测扫描型与文本型 PDF，并转换为干净的 Markdown。在 200ms 内完成本地文本型 PDF 处理，基准测试整体得分 0.875 超越 PyMuPDF4LLM、MarkItDown 等主流方案，支持多栏布局、表格检测和浏览器 WebAssembly 运行。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory" target="_blank" rel="noopener">TencentCloud/TencentDB-Agent-Memory</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">TypeScript · 开源</p>
+          <p class="project-desc">面向 AI Agent 的团队级记忆中枢，将对话、文档和代码转化为四种可复用记忆资产。采用符号化短期记忆 + 分层长期记忆架构，在 OpenClaw 集成中 token 使用量降低 61.38%，任务通过率提升 51.52%，PersonaMem 准确率从 48% 提升至 76%。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/lyogavin/airllm" target="_blank" rel="noopener">lyogavin/airllm</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Python · Apache-2.0</p>
+          <p class="project-desc">让 70B 大语言模型在单张 4GB GPU 上运行，无需量化、蒸馏或剪枝。通过逐层流式加载技术，VRAM 需求取决于层大小而非模型总量。支持 Llama 3.1 405B（8GB）、DeepSeek-V3 671B（12GB）、Kimi K3 2.8T（3.72GB）等超大规模模型，覆盖几乎所有主流开源 LLM 家族。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/esengine/DeepSeek-Reasonix" target="_blank" rel="noopener">esengine/DeepSeek-Reasonix</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Go / TypeScript · MIT</p>
+          <p class="project-desc">DeepSeek 原生终端 AI 编程代理，围绕前缀缓存稳定性设计，适合长时间运行。1.0 版本用 Go 从头重写，单静态二进制文件零依赖。配置驱动 + 插件驱动架构，外部工具通过 stdio JSON-RPC（MCP 兼容）运行，支持双模型协作（执行器 + 规划器）。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank" rel="noopener">microsoft/AI-For-Beginners</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Jupyter Notebook · MIT</p>
+          <p class="project-desc">12 周 24 节课的 AI 入门课程，适合所有人。微软官方出品的系统性 AI 教程，涵盖经典符号 AI 和现代深度学习，配有中英等多国语言翻译及实验指南，为 AI 初学者提供从理论到实践的完整学习路径。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/google/skills" target="_blank" rel="noopener">google/skills</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Python / Shell · Apache-2.0</p>
+          <p class="project-desc">Google 产品和技术的 Agent Skills 集合，覆盖 Gemini API、BigQuery、Cloud Run、GKE、AlloyDB、Firebase 等核心云服务，以及 Well-Architected Framework 六大维度最佳实践。通过 <code>npx skills add google/skills</code> 一键安装，推动 Agent 技能生态标准化。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/unclebob/swarm-forge" target="_blank" rel="noopener">unclebob/swarm-forge</a></h3>
+            <span class="project-stars">★ 2,052（本周 +562）</span>
+          </div>
+          <p class="project-lang">Clojure · 开源</p>
+          <p class="project-desc">简洁的 AI Agent 协调工具，由《Clean Code》作者 Robert C. Martin（unclebob）打造。以极简理念解决多 Agent 协调问题，本周新增 562 颗 Star，增长势头强劲，体现了社区对轻量级 Agent 编排方案的渴望。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/Comfy-Org/ComfyUI" target="_blank" rel="noopener">Comfy-Org/ComfyUI</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Python · GPL-3.0</p>
+          <p class="project-desc">最强大、最模块化的扩散模型 GUI、API 和后端，以节点图界面驱动 AI 内容创作。原生支持 Stable Diffusion、Flux、Wan、HunyuanVideo 等最新开源模型，覆盖图像、视频、3D、音频生成全链路。v0.30.0 持续迭代，5700+ 提交活跃维护。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/drawdb-io/drawdb" target="_blank" rel="noopener">drawdb-io/drawdb</a></h3>
+            <span class="project-stars">★ 38.2k</span>
+          </div>
+          <p class="project-lang">JavaScript · AGPL-3.0</p>
+          <p class="project-desc">免费、简单、直观的在线数据库图表编辑器和 SQL 生成器。纯浏览器端运行，无需注册即可构建 ER 图、导出导入 SQL 脚本、生成数据库迁移。支持 PostgreSQL、MySQL、MariaDB、SQLite、SQL Server、Oracle 等主流数据库。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/livekit/agents" target="_blank" rel="noopener">livekit/agents</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Python · Apache-2.0</p>
+          <p class="project-desc">构建实时语音 AI 代理的框架，让 Agent 能看、能听、能理解。灵活的 STT/LLM/TTS/Realtime API 集成生态，内置任务调度和分发，支持 WebRTC 客户端和电话集成。语义级轮次检测减少打断，原生 MCP 支持，v1.6.9 持续更新，477 位贡献者参与。</p>
+        </div>
+
+        <div class="project">
+          <div class="project-header">
+            <h3 class="project-name"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">donnemartin/system-design-primer</a></h3>
+            <span class="project-stars">★ 趋势热门</span>
+          </div>
+          <p class="project-lang">Python · 开源</p>
+          <p class="project-desc">学习大规模系统设计，备战系统设计面试，包含 Anki 抽认卡。GitHub 上最受欢迎的系统设计学习资源之一，涵盖负载均衡、缓存、数据库分片、消息队列等核心主题，是面试准备和架构学习的经典之选。</p>
+        </div>
+
+        <h2>关键趋势洞察</h2>
+        <ul>
+          <li><strong>AI Agent 记忆与协调走向工程化</strong>：TencentDB Agent Memory 的分层记忆架构和 swarm-forge 的多 Agent 协调方案表明，Agent 的记忆管理和编排正在从概念验证走向生产级工程实践，token 消耗和任务成功率成为核心度量指标。</li>
+          <li><strong>大模型推理门槛持续下探</strong>：airllm 让 70B 模型在 4GB GPU 上运行，DeepSeek-Reasonix 围绕前缀缓存优化长期会话成本，推理硬件和成本门槛的降低正在让更多开发者参与 AI 应用构建。</li>
+          <li><strong>Agent Skills 生态标准化加速</strong>：Google 官方输出 skills 仓库、book-to-skill 将技术书籍转化为可复用技能，Agent 技能层正在独立成型，跨平台技能复用和标准化成为新趋势。</li>
+          <li><strong>开发者工具全面 AI 化</strong>：从 PDF 处理（pdf-inspector）到数据库设计（drawdb），传统开发工具正在深度集成 AI 能力。Rust 等高性能语言在 AI 基础设施中的应用持续扩大。</li>
+          <li><strong>实时多模态交互进入生产级</strong>：livekit/agents 推动语音 AI Agent 走向生产应用，ComfyUI 持续扩展多模态生成能力，实时交互和多模态融合正成为 AI 应用的新前沿。</li>
+        </ul>
+
+        <h2>数据来源</h2>
+        <ul>
+          <li><a href="https://github.com/trending?since=weekly" target="_blank" rel="noopener">GitHub Trending - Weekly</a></li>
+          <li>各项目 GitHub 仓库页面（采集时点数据，2026-08-10）</li>
+        </ul>
+
+        <a href="../index.html" class="back-to-home">← 返回首页</a>
+
+        <div class="ai-note">
+          <span>⚠</span>
+          <span>本报告由 AI 自动采集 GitHub Trending 周榜数据生成，所有项目信息均来自真实搜索和网页抓取，未经人工编造。Star 数为采集时点数据。</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 AI 资讯站 · 由 AI 驱动的内容平台</span>
+        <span>Powered by GitHub Pages</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
